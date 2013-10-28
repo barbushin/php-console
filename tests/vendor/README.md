@@ -1,0 +1,1 @@
+To init vendors run "composer install" in parent directory

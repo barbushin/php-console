@@ -1,0 +1,40 @@
+<phpunit backupGlobals="true"
+         backupStaticAttributes="true"
+         cacheTokens="true"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         forceCoversAnnotation="false"
+         mapTestClassNameToCoveredClassName="false"
+         processIsolation="false"
+         stopOnError="true"
+         stopOnFailure="true"
+         stopOnIncomplete="true"
+         stopOnSkipped="false"
+         bootstrap="./bootstrap.php"
+         strict="false"
+         verbose="true"
+	>
+
+	<groups>
+		<include>
+			<!--
+			<group>now</group>
+			-->
+		</include>
+		<exclude>
+			<!--
+			<group>ssl</group>
+			<group>slow</group>
+			-->
+		</exclude>
+	</groups>
+
+	<testsuites>
+		<testsuite name="PhpConsoleTestSuite">
+			<directory suffix=".php">Test</directory>
+		</testsuite>
+	</testsuites>
+
+</phpunit>

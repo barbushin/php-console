@@ -1,0 +1,44 @@
+@import "pure-nr-min.css";
+
+body {
+	color: rgb(75, 75, 75);
+}
+
+a, a:visited, a:hover, a:active {
+	color: #0078e7;
+	text-decoration: none;
+}
+
+.link {
+	padding-top: 0.5em;
+	display: block;
+}
+
+iframe {
+	width: 100%;
+	min-height: 10px;
+	border: 0;
+}
+
+.active {
+	font-weight: bold;
+	outline: none !important;
+}
+
+.warning {
+	margin: auto;
+	display: table;
+	padding: 0.5em;
+	background: mintcream;
+	border: 1px solid #eee;
+}
+
+.code {
+	width: 100%;
+	padding: 1em;
+	font-size: 0.9em;
+	font-family: Consolas, 'Liberation Mono', Courier, monospace;
+	color: #333;
+	background: rgb(250, 250, 250);
+	border: 1px solid #eee;
+}
