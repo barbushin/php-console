@@ -13,10 +13,9 @@ if($connector->isActiveClient()) {
 	// Init errors & exceptions handler
 	$handler = PC::getHandler();
 	$handler->start(); // start handling PHP errors & exceptions
-	$handler->getConnector()->setSourcesBasePath($_SERVER['DOCUMENT_ROOT']); // so files paths on client will be shorter (optional)
 
-	// Protect access by password
-	$connector->setPassword($password); // Eval requests listener can be started only in password protected mode
+	$connector->setSourcesBasePath($_SERVER['DOCUMENT_ROOT']); // so files paths on client will be shorter (optional)
+	$connector->setPassword($password); // protect access by password
 	// $connector->enableSslOnlyMode(); // PHP Console clients will be always redirected to HTTPS
 	// $connector->setAllowedIpMasks(array('192.168.*.*'));
 
