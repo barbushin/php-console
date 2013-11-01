@@ -15,8 +15,6 @@ PHP Console allows you to handle PHP errors & excepions, dump variables, execute
 
 # Installation
 
-There are several ways to install PHP Console server library:
-
 ### Composer
 
 	{
@@ -33,6 +31,13 @@ Download and extract [PhpConsole.zip](https://github.com/barbushin/php-console/a
 Include in your project using:
 
 	require_once('/path/to/php-console/src/PhpConsole/__autoload.php');
+
+### Download .phar
+
+Download [PhpConsole.phar](http://phpc/PhpConsole/examples/utils/build_phar.php?download). 
+Include in your project using:
+
+	require_once('phar://path/to/PhpConsole.phar');
 
 ### Yii Framework extension
 See https://github.com/barbushin/php-console-yii
