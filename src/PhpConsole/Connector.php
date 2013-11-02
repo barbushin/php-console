@@ -354,7 +354,11 @@ class Connector {
 	 */
 	protected function convertEncoding(&$string, $toEncoding, $fromEncoding) {
 		if($string && is_string($string)) {
-			if(function_exists('mb_convert_encoding')) {
+			static $isMbString;
+			if($isMbString === null) {
+				$isMbString = extension_loaded('mbstring');
+			}
+			if($isMbString) {
 				$string = @mb_convert_encoding($string, $toEncoding, $fromEncoding) ? : $string;
 			}
 			else {

@@ -2,8 +2,8 @@
 
 namespace PhpConsole\Test;
 
-// configure it up to your server
-const SERVER_URL = 'http://xxxxxxx/PhpConsole/tests/server.php'; // URL path to __DIR__ . '/server.php'
+// Configure it up to your server
+const SERVER_URL = 'http://host.com/src/PhpConsole/tests/server.php'; // URL path to __DIR__ . '/server.php'
 const SERVER_KEY = null; // some very very unique password :)
 
 // leave it as is
@@ -37,5 +37,3 @@ if(!class_exists('PHPUnit_Framework_TestCase')) {
 }
 
 require_once(__DIR__ . '/../src/PhpConsole/__autoload.php');
-
-

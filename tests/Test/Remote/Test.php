@@ -197,7 +197,7 @@ abstract class Test extends \PhpConsole\Test\Test {
 	}
 
 	function convertEncoding($string, $toEncoding, $fromEncoding) {
-		if(function_exists('mb_convert_encoding')) {
+		if(extension_loaded('mbstring')) {
 			return mb_convert_encoding($string, $toEncoding, $fromEncoding);
 		}
 		else {

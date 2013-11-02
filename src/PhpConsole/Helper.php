@@ -6,7 +6,7 @@ namespace PhpConsole {
 	 * Makes more easy access to debug dispatcher method.
 	 *
 	 * Usage:
-	 * 1. Call Helper::register();
+	 * 1. Call \PhpConsole\Helper::register();
 	 * 2. Call PC::debug($sql, 'db') or PC::db($sql)
 	 *
 	 * It will be the same as calling Handler::getInstance()->debug($var, 'db')
@@ -96,12 +96,11 @@ namespace PhpConsole {
 
 		/**
 		 * Short access to analog of Handler::getInstance()->debug(...) method
-		 * You can access it like PC::tagName($debugData, $additionalTags)
-		 * @param $tag
+		 * You can access it like PC::tagName($debugData, $additionalTags = null)
+		 * @param string $tags
 		 * @param $args
 		 */
-		public static function __callStatic($tag, $args) {
-			$tags = $tag;
+		public static function __callStatic($tags, $args) {
 			if(isset($args[1])) {
 				$tags .= '.' . $args[1];
 			}

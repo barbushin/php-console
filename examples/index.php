@@ -23,6 +23,7 @@ $features = array(
 	'eval_terminal' => 'PHP code remote execution',
 	'highload_optimization' => 'Highload optimization',
 	'complex_usage_example' => 'Complex usage example',
+	'old_version_adapter' => 'Old version adapter',
 );
 
 $utils = array(
@@ -33,9 +34,12 @@ $utils = array(
 
 // Highlight & print feature script source code
 if(isset($_GET['highlight']) && isset($features[$_GET['highlight']])) {
-	highlight_file(__DIR__ . '/features/' . $_GET['highlight'] . '.php');
+	echo highlight_string(preg_replace('/(\$password\s*=\s*).*?;/', '\1*****;', file_get_contents(__DIR__ . '/features/' . $_GET['highlight'] . '.php')));
 	exit;
 }
+
+require_once(__DIR__ . '/../src/PhpConsole/__autoload.php');
+$isActiveClient = \PhpConsole\Connector::getInstance()->isActiveClient();
 
 ?>
 <html lang="en">
@@ -91,17 +95,16 @@ if(isset($_GET['highlight']) && isset($features[$_GET['highlight']])) {
 
 <h1 align="center">PHP Console Features examples & Utils</h1>
 
-<? if(!isset($_COOKIE['php-console-client'])) { ?>
+<?php if(!$isActiveClient) { ?>
 	<span class="warning" align="center">
 	Google Chrome extension
 	<a href="https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef" target="_blank">PHP Console</a>
 	must be installed.
 </span>
-<? } ?>
+<?php } ?>
 
 
 <div class="pure-g" style="width: 100%; padding: 20px;">
-
 	<div class="pure-u-1" style="width:250px">
 		<h2>Features</h2>
 
@@ -111,7 +114,6 @@ if(isset($_GET['highlight']) && isset($features[$_GET['highlight']])) {
 
 		<div id="utils"></div>
 	</div>
-
 
 	<div class="pure-u-1" id="content" style="width:1000px; display: none;">
 		<h2 id="outputTitle"></h2>

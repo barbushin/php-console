@@ -82,29 +82,34 @@ class Connector {
 
 		$curlHandle = curl_init();
 		curl_setopt_array($curlHandle, $curlOptions);
-		$responseOutput = curl_exec($curlHandle);
+		$responseData = curl_exec($curlHandle);
 		$code = curl_getinfo($curlHandle, CURLINFO_HTTP_CODE);
 		$error = curl_error($curlHandle);
-		$responseData = substr($responseOutput, curl_getinfo($curlHandle, CURLINFO_HEADER_SIZE));
-		$responseHeaders = substr($responseOutput, 0, curl_getinfo($curlHandle, CURLINFO_HEADER_SIZE));
+
+		$responseHeaders = substr($responseData, 0, curl_getinfo($curlHandle, CURLINFO_HEADER_SIZE));
+		if(substr($responseHeaders, -1) !== "\n") { // because curl_getinfo($curlHandle, CURLINFO_HEADER_SIZE) is bugged on some PHP versions
+			$responseHeaders = substr($responseData, 0, strpos($responseData, PHP_EOL . PHP_EOL));
+		}
+
+		$responseOutput = substr($responseData, strlen($responseHeaders));
 		curl_close($curlHandle);
 
 		$response = new Response();
 		$response->code = $code;
-		$response->output = $postponedResponseId ? $postponedOutput : $responseData;
+		$response->output = $postponedResponseId ? $postponedOutput : $responseOutput;
 		$response->headerData = $this->parseHeaderData($responseHeaders);
 		$response->cookies = $this->parseCookies($responseHeaders);
 
 		try {
 			if($error || ($code != 200 && $code != 204 && $code != 500)) {
-				throw new \Exception('Connection to "' . $this->serverWrapperUrl . '" failed with code "' . $code . '" and error: ' . $error . '" and response: "' . $responseData, $code);
+				throw new \Exception('Connection to "' . $this->serverWrapperUrl . '" failed with code "' . $code . '" and error: ' . $error . '" and response: "' . $responseOutput, $code);
 			}
-			$packageEncodedData = $postponedResponseId ? $responseData : $response->headerData;
+			$packageEncodedData = $postponedResponseId ? $responseOutput : $response->headerData;
 			if($packageEncodedData) {
 				$packageData = $this->jsonDecode($packageEncodedData);
 				if(!empty($packageData['isPostponed'])) {
 					$request->cookies = $response->cookies;
-					$response = $this->sendRequest($request, $packageData['id'], $responseData);
+					$response = $this->sendRequest($request, $packageData['id'], $responseOutput);
 					$response->isPostponed = true;
 					return $response;
 				}

@@ -66,7 +66,7 @@ class Auth extends Test {
 	}
 
 	public function testAuthWithPasswordInCustomServerEncoding() {
-		if(!function_exists('mb_convert_encoding')) {
+		if(!extension_loaded('mbstring')) {
 			$this->markTestSkipped('There is strange bug using iconv in this test');
 			return;
 		}

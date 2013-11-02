@@ -88,5 +88,4 @@ PC::debug(array(
 
 echo !$connector->isAuthorized()
 	? 'To access eval terminal you need to authorize. Click on PHP Console "key" icon in address bar and enter the password.'
-	: 'See errors & debug data in JavaScript Console(Ctrl+Shift+J).<br/>
-		Click on PHP Console terminal icon in address bar to access eval terminal and try to execute some PHP code.';
+	: 'See errors & debug data in JavaScript Console(Ctrl+Shift+J).<br/>Click on PHP Console terminal icon in address bar to access eval terminal and try to execute some PHP code.';
