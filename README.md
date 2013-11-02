@@ -25,6 +25,14 @@ PHP Console allows you to handle PHP errors & excepions, dump variables, execute
 
 This is the most recommended way, so PhpConsole will be autoloaded using Composer PSR-0 autoloader. Also it can be easy updated to last version using `composer update`.
 
+### GIT
+
+	git clone https://github.com/barbushin/php-console.git php-console
+
+### SVN
+
+	svn checkout https://github.com/barbushin/php-console/trunk php-console
+
 ### Download .zip
 
 Download and extract [PhpConsole.zip](https://github.com/barbushin/php-console/archive/master.zip). 
@@ -44,7 +52,7 @@ See https://github.com/barbushin/php-console-yii
 
 # Features
 
-There is a list of server library features with some usage examples. You can see how most of them works on PHP Console [examples server](http://php-console.com/instance/examples).
+You can see how most of this features works on PHP Console [live examples](http://php-console.com/instance/examples) server.
 
 ## Connector
 
@@ -197,9 +205,9 @@ There is PHP Console implementation of [PSR-3](https://github.com/php-fig/fig-st
 
 Read [this article](https://github.com/barbushin/php-console/wiki/Jump-to-file) if you want to configure PHP Console extension to open errors/exceptions source file:line right in your IDE just by click on the button in Notification popup.
 
-## Easy migrate from PhpConsole `v1.*` to `v3.*`
+## Easy migrate from PhpConsole `v1.x` to `v3.x`
 
-If you have used PhpConsole `v1.*` and want to migrate to `v3.*`  without any code changes, so just use [\PhpConsole\OldVersionAdapter](src/PhpConsole/OldVersionAdapter.php):
+If you have used PhpConsole `v1.x` and want to migrate to `v3.x`  without any code changes, so just use [\PhpConsole\OldVersionAdapter](src/PhpConsole/OldVersionAdapter.php):
 
 	\PhpConsole\OldVersionAdapter::register(); // register PhpConsole class emulator
 	
