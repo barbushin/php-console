@@ -1,4 +1,4 @@
-# PHP Console
+# PHP Console server library
 
 PHP Console allows you to handle PHP errors & excepions, dump variables, execute PHP code remotely and many other things using [Google Chrome extension PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef/details) and [PhpConsole server library](https://github.com/barbushin/php-console).
 
