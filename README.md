@@ -86,7 +86,7 @@ PHP Console provide different ways to protect
 
 ### Protect by password
 
-![ScreenShot](http://php-console.com/res/screenshot/auth_420.png)
+[![ScreenShot](http://php-console.com/res/screenshot/auth_420.png)](http://php-console.com/instance/examples/#protect_by_password)
 
 	$connector->setPassword('yohoho123', true);
 
@@ -104,7 +104,7 @@ So all PHP Console clients will be automatically redirected to HTTPS.
 
 ## Handle errors
 
-[![ScreenShot](http://php-console.com/res/screenshot/errors_420.png)](http://php-console.com/res/screenshot/errors_1280.png)
+[![ScreenShot](http://php-console.com/res/screenshot/errors_420.png)](http://php-console.com/instance/examples/#handle_errors)
 
 There is a [\PhpConsole\Handler](src/PhpConsole/Handler.php) class that initializes PHP errors & exceptions handlers and provides the next features:
 
@@ -127,7 +127,7 @@ Initialize `\PhpConsole\Handler` in the top of your main project script:
 
 ## Debug vars
 
-[![ScreenShot](http://php-console.com/res/screenshot/debug_420.png)](http://php-console.com/res/screenshot/debug_1280.png)
+[![ScreenShot](http://php-console.com/res/screenshot/debug_420.png)](http://php-console.com/instance/examples/#debug_vars)
 
 PHP Console has multifunctional and smart vars dumper that allows to
 
@@ -172,7 +172,7 @@ PHP Console has multifunctional and smart vars dumper that allows to
 
 ## Remote PHP code execution
 
-[![ScreenShot](http://php-console.com/res/screenshot/eval_terminal_420.png)](http://php-console.com/res/screenshot/eval_terminal_1280.png)
+[![ScreenShot](http://php-console.com/res/screenshot/eval_terminal_420.png)](http://php-console.com/instance/examples/#eval_terminal)
 
 PHP Console provide a way to execute PHP code on your server remotely, from Google Chrome extension terminal.
 
