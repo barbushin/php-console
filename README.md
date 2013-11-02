@@ -35,7 +35,7 @@ This is the most recommended way, so PhpConsole will be autoloaded using Compose
 
 ### Download .zip
 
-Download and extract [PhpConsole.zip](https://github.com/barbushin/php-console/archive/master.zip). 
+Download and extract repository [archive](https://github.com/barbushin/php-console/archive/master.zip). 
 Include in your project using:
 
 	require_once('/path/to/php-console/src/PhpConsole/__autoload.php');
