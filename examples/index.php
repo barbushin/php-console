@@ -51,11 +51,11 @@ $isActiveClient = \PhpConsole\Connector::getInstance()->isActiveClient();
 	<script>
 		$(function () {
 
-			function initMenuItems(items, id, showSource) {
+			function initMenuItems(items, group, showSource) {
 				for(var alias in items) {
-					$('#' + id).append($('<a>', {href: '#' + alias, text: items[alias], class: 'link', id: alias})
+					$('#' + group).append($('<a>', {href: '#' + alias, text: items[alias], class: 'link', id: alias})
 						.click(function () {
-							var uri = id + '/' + this.id + '.php';
+							var uri = group + '/' + this.id + '.php';
 
 							$('#content').hide();
 							$('#outputTitle').text(this.text);
@@ -78,6 +78,10 @@ $isActiveClient = \PhpConsole\Connector::getInstance()->isActiveClient();
 									$('#content').show();
 									$(this).height(this.contentWindow.document.body.offsetHeight);
 								});
+
+							window.location.hash = '#' + this.id;
+							window.scrollTo(0, 0);
+							return false;
 						}));
 				}
 			}
