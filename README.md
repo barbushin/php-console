@@ -78,7 +78,7 @@ If you internal server encoding is not UTF-8, so you need to call:
 
 	$connector->setServerEncoding('CP1251');
 
-### Optimize initialization perfomance
+### Initialization performance
 
 PhpConsole server library is optimized for lazy initialization only for clients that have Google Chrome extension PHP Console installed. There is [example](examples/features/highload_optimization.php) of correct initialization PhpConsole on your production server.
 
@@ -211,7 +211,7 @@ Read [this article](https://github.com/barbushin/php-console/wiki/Jump-to-file) 
 
 If you have used PhpConsole `v1.x` and want to migrate to `v3.x`  without any code changes, so just use [\PhpConsole\OldVersionAdapter](src/PhpConsole/OldVersionAdapter.php):
 
-	\PhpConsole\OldVersionAdapter::register(); // register PhpConsole class emulator
+	\PhpConsole\OldVersionAdapter::register(); // register PhpConsole v1.x class emulator
 	
 	// Call old PhpConsole v1 methods as is
 	PhpConsole::start(true, true, $_SERVER['DOCUMENT_ROOT']);
