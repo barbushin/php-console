@@ -456,6 +456,7 @@ class Connector {
 					$response->auth = $this->auth->getServerAuthStatus($this->client->auth);
 				}
 				if(!$this->auth || $this->isAuthorized()) {
+					$response->isLocal = isset($_SERVER['REMOTE_ADDR']) && $_SERVER['REMOTE_ADDR'] == '127.0.0.1';
 					$response->docRoot = isset($_SERVER['DOCUMENT_ROOT']) ? $_SERVER['DOCUMENT_ROOT'] : null;
 					$response->sourcesBasePath = $this->sourcesBasePath;
 					$response->isEvalEnabled = $this->isEvalListenerStarted;
@@ -585,8 +586,9 @@ final class Response extends DataObject {
 	public $docRoot;
 	public $sourcesBasePath;
 	public $getBackData;
-	public $isSslOnlyMode = false;
-	public $isEvalEnabled = false;
+	public $isLocal;
+	public $isSslOnlyMode;
+	public $isEvalEnabled;
 	public $messages = array();
 }
 

@@ -90,6 +90,11 @@ class Connector extends Test {
 		$this->assertContains(realpath($this->response->package->docRoot), \PhpConsole\Test\BASE_DIR);
 	}
 
+	public function testIsLocalInResponse() {
+		$this->sendRequest();
+		$this->assertTrue($this->response->package->isLocal);
+	}
+
 	/**
 	 * @group ssl
 	 */
