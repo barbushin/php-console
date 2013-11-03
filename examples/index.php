@@ -34,7 +34,7 @@ $utils = array(
 
 // Highlight & print feature script source code
 if(isset($_GET['highlight']) && isset($features[$_GET['highlight']])) {
-	echo highlight_string(preg_replace('/(\$password\s*=\s*).*?;/', '\1*****;', file_get_contents(__DIR__ . '/features/' . $_GET['highlight'] . '.php')));
+	highlight_string(preg_replace('/(\$password\s*=\s*).*?;/', '\1*****;', file_get_contents(__DIR__ . '/features/' . $_GET['highlight'] . '.php')));
 	exit;
 }
 
