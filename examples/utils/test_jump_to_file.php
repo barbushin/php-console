@@ -10,7 +10,7 @@
 				var link = document.createElement('a');
 				link.setAttribute('href', 'editor://open/?file='
 					+ encodeURIComponent($('#editorTestPath').val().trim())
-					+ '?line'
+					+ '&line='
 					+ encodeURIComponent($('#editorTestLine').val().trim())
 				);
 				link.click();
@@ -26,7 +26,7 @@ This is a test tool for <a href="https://github.com/barbushin/php-console/wiki/J
 
 <form class="pure-form">
 	<fieldset>
-		<input type="text" placeholder="Path to some PHP file" id="editorTestPath" style="width: 500px;" />
+		<input type="text" placeholder="Path to some local PHP file" id="editorTestPath" style="width: 500px;" />
 		<input type="text" placeholder="Line" size="4" id="editorTestLine" />
 		<button class="pure-button pure-button-primary" id="testButton">Open in editor</button>
 	</fieldset>
