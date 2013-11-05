@@ -15,6 +15,8 @@ PHP Console allows you to handle PHP errors & excepions, dump variables, execute
 * Google Chrome extension [PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) on client.
 * PHP 5.3 (or later) on server.
 
+*For projects with PHP < 5.3 you can try to use old [deprecated version](https://groups.google.com/forum/?hl=ru#!forum/php-console-deprecated-version) of PHP Console. But mention that actual last version is much more functional.*
+
 # Installation
 
 ### Composer
@@ -224,3 +226,5 @@ If you have used PhpConsole `v1.x` and want to migrate to `v3.x`  without any co
 	\PhpConsole\Connector::getInstance()->setServerEncoding('cp1251');
 	\PhpConsole\Helper::register();
 	PC::debug('Debug using new methods');
+
+But, anyway, if you can't migrate to new version of PHP Console because of using PHP < 5.3 on your servers, then you can use old [deprecated version](https://groups.google.com/forum/?hl=ru#!forum/php-console-deprecated-version) of PHP Console.
