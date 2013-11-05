@@ -180,8 +180,6 @@ PHP Console has multifunctional and smart vars dumper that allows to
 
 PHP Console provide a way to execute PHP code on your server remotely, from Google Chrome extension terminal.
 
-### Features
-
 * Remote PHP code execution allowed only in password protected mode
 * Every eval request is signed with unique SHA-256 token
 * Result contains: `output`, `return` and `time` data
