@@ -1,0 +1,13 @@
+Release 1.1
+
+Fixed: error in PHP < 5.3 syntax error, unexpected T_STATIC in PhpConsole.php on line 249
+Fixed: PhpConsole::convertTraceToString for calls without arguments
+Added: basePath stripping
+
+Release 1.0
+
+* Debug: Handle all exceptions and errors (even fatal)
+* Added: Handle all exceptions and errors (even fatal)
+* Added: Ignore repeated events when PhpConsole::$ignoreRepeatedEvents
+* Added: Call previouse errors handler when PhpConsole::$callOldErrorHandler
+* Added: Call previous exceptions handler when PhpConsole::$callOldExceptionsHandler

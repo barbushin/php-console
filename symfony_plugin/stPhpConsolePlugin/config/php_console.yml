@@ -1,0 +1,9 @@
+prod:
+
+all:
+  enabled: true
+  handleErrors: true
+  handleExceptions: true
+  callOldErrorHandler: true
+  callOldExceptionsHandler: true
+  logEventsNames: [sql, debug]

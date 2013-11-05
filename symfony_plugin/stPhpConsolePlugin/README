@@ -1,0 +1,57 @@
+# stPhpConsolePlugin
+
+## Overview
+
+The stPhpConsolePlugin integrates Symfony Framework with 
+[Google Chrome extension "PHP Console"](https://chrome.google.com/extensions/detail/nfhmhhlpfleoednkpnnnkolmclajemef) 
+and [PhpConsole class](http://code.google.com/p/php-console).
+
+PhpConsole catches all kind of errors/exceptions/debug messages and sends them to Google Chrome extension PHP Console,
+that displays them in Google Chrome console or by notification popups.
+
+## Requirements
+
+* [Symfony](http://www.symfony-project.org) 1.1 - 1.4
+* [Google Chrome extension "PHP Console"](https://chrome.google.com/extensions/detail/nfhmhhlpfleoednkpnnnkolmclajemef)
+
+
+
+## Installation
+
+1. [Install Google Chrome extension PHP Console](https://chrome.google.com/extensions/detail/nfhmhhlpfleoednkpnnnkolmclajemef)
+
+2. [Download plugin archive](http://php-console.googlecode.com/svn/trunk/symfony_plugin/packages/stPhpConsolePlugin-1.0.1.tgz)
+
+3. Install plugin package
+
+        php symfony plugin:install /path/to/local/stPhpConsolePlugin-1.0.1.tgz
+
+4. Enable it in "config/ProjectConfiguration.class.php"
+
+        class ProjectConfiguration extends sfProjectConfiguration
+        {
+          public function setup()
+          {
+                $this->enablePlugins('stPhpConsolePlugin');
+          }
+        }
+
+5. Copy  "/plugins/stPhpConsolePlugin/config/php_console.yml" to "/PROJECT/config/" and check how it's configured.
+
+6. Test this code in some controller:
+
+
+        // generate some Symfony events with names [sql, debug] described in config
+        sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent('SELECT * FROM users', 'sql'));
+        sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent('Debug test message', 'debug'));
+        sfContext::getInstance()->getEventDispatcher()->notify(new sfEvent('This message will not be catched', 'debug.post'));
+
+        // generate PhpConsole debug message and some errors
+        debug('There is a short way to debug by PhpConsole debug() function', 'any,tags');
+        file_get_contents('this_will_generate_E_WARNING');
+        throw new Exception('This exception will be catched by PhpConsole');
+
+
+## Feedback
+
+Thanks for your [feedback and bug reporting](http://code.google.com/p/php-console/issues).
