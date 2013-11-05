@@ -2,14 +2,11 @@
 
 /**
  *
- * @see http://code.google.com/p/php-console
+ * @see https://groups.google.com/forum/?hl=ru#!forum/php-console-deprecated-version
  * @author Barbushin Sergey http://linkedin.com/in/barbushin
  * @version 1.1
  *
  * @desc Sending messages to Google Chrome console
- *
- * You need to install Google Chrome extension:
- * https://chrome.google.com/extensions/detail/nfhmhhlpfleoednkpnnnkolmclajemef
  *
  * All class properties and methods are static because it's required to let
  * them work on script shutdown when FATAL error occurs.
