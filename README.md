@@ -56,7 +56,7 @@ See https://github.com/barbushin/php-console-yii
 
 # Features
 
-You can see how most of this features works on PHP Console [live examples](http://php-console.com/instance/examples) server.
+You can try most of PHP Console features on [live demo](http://php-console.com/instance/examples) server.
 
 ## Connector
 
