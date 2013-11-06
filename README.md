@@ -7,7 +7,9 @@ PHP Console allows you to handle PHP errors & excepions, dump variables, execute
 ### Overview
 
 * Install Google Chrome extension [PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef/details).
-* See how it works on PHP Console [live examples](http://php-console.com/instance/examples) server.
+* See how it works on PHP Console [live demo](http://php-console.com/instance/examples) page.
+* PHP Console extension full [features list and screenshots](https://github.com/barbushin/php-console/wiki/PHP-Console-extension-features).
+* PHP Console server library full [features list](https://github.com/barbushin/php-console/wiki/PHP-Console-server-features).
 
 ### Requirements
 
