@@ -226,3 +226,4 @@ If you have used PhpConsole `v1.x` and want to migrate to `v3.x`  without any co
 
 But, anyway, if you can't migrate to new version of PHP Console because of using PHP < 5.3 on your servers, then you can use old [deprecated version](https://groups.google.com/forum/?hl=ru#!forum/php-console-deprecated-version) of PHP Console.
 
+.. test master
