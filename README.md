@@ -7,13 +7,13 @@ PHP Console allows you to handle PHP errors & excepions, dump variables, execute
 ### Overview
 
 * Install Google Chrome extension [PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef/details).
-* See how it works on PHP Console [live demo](http://php-console.com/instance/examples) page.
-* PHP Console extension full [features list and screenshots](https://github.com/barbushin/php-console/wiki/PHP-Console-extension-features).
-* PHP Console server library full [features list](https://github.com/barbushin/php-console/wiki/PHP-Console-server-features).
+* See how it works on [live demo](http://php-console.com/instance/examples) page.
+* PHP Console extension [features list and screenshots](https://github.com/barbushin/php-console/wiki/PHP-Console-extension-features).
+* PHP Console server library [features list](https://github.com/barbushin/php-console/wiki/PHP-Console-server-features).
 
 ### Requirements
 
-* Google Chrome extension [PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) on client.
+* [PHP Console extension](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) must be installed on Google Chrome.
 * PHP 5.3 (or later) on server.
 
 *For projects with PHP < 5.3 you can try to use old [deprecated version](https://groups.google.com/forum/?hl=ru#!forum/php-console-deprecated-version) of PHP Console. But mention that actual last version is much more functional.*
@@ -55,7 +55,7 @@ Include in your project using:
 ### Yii Framework extension
 See https://github.com/barbushin/php-console-yii
 
-# Features
+# Usage
 
 You can try most of PHP Console features on [live demo](http://php-console.com/instance/examples) server.
 
