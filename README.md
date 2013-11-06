@@ -184,7 +184,7 @@ PHP Console provide a way to execute PHP code on your server remotely, from Goog
 * Remote PHP code execution allowed only in password protected mode
 * Every eval request is signed with unique SHA-256 token
 * Result contains: `output`, `return` and `time` data
-* Errors & exception occured during PHP code execution will be handled
+* Errors & exception occurred during PHP code execution will be handled
  
 
 ### Configuration
