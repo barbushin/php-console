@@ -27,7 +27,7 @@ PHP Console allows you to handle PHP errors & excepions, dump variables, execute
 		}
 	}
 
-This is the most recommended way, so PhpConsole will be autoloaded using Composer PSR-0 autoloader. Also it can be easy updated to last version using `composer update`.
+This is the most recommended way, so PhpConsole will be autoloaded using Composer [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) autoloader. Also it can be easy updated to last version using `composer update`.
 
 ### GIT
 
