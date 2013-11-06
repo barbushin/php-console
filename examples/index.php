@@ -39,7 +39,13 @@ if(isset($_GET['highlight']) && isset($features[$_GET['highlight']])) {
 }
 
 require_once(__DIR__ . '/../src/PhpConsole/__autoload.php');
-$isActiveClient = \PhpConsole\Connector::getInstance()->isActiveClient();
+// There must be code like this
+// $isActiveClient = \PhpConsole\Connector::getInstance()->isActiveClient();
+// But to prevent conflicts between current PHP Console server and server inside IFrame we need to use workaround. It will be fixed in next extension version.
+$isActiveClient = isset($_COOKIE[\PhpConsole\Connector::SERVER_COOKIE]);
+if(!$isActiveClient) {
+	\PhpConsole\Connector::getInstance();
+}
 
 ?>
 <html lang="en">
@@ -49,12 +55,12 @@ $isActiveClient = \PhpConsole\Connector::getInstance()->isActiveClient();
 	<link rel="stylesheet" href="styles.css" />
 	<script src="jquery-2.0.3.min.js"></script>
 	<script>
-		$(function () {
+		$(function() {
 
 			function initMenuItems(items, group, showSource) {
 				for(var alias in items) {
 					$('#' + group).append($('<a>', {href: '#' + alias, text: items[alias], class: 'link', id: alias})
-						.click(function () {
+						.click(function() {
 							var uri = group + '/' + this.id + '.php';
 
 							$('#content').hide();
@@ -65,15 +71,14 @@ $isActiveClient = \PhpConsole\Connector::getInstance()->isActiveClient();
 							console.clear();
 
 							if(showSource) {
-								$('#sourceCode').html('').load('?highlight=' + this.id);
-								$('#sourceCode').show();
+								$('#sourceCode').html('').load('?highlight=' + this.id).show();
 							}
 							else {
 								$('#sourceCode').hide();
 							}
 
 							$('#outputIFrame').height(0).attr('src', uri)
-								.load(function () {
+								.load(function() {
 									$('#outputIFrame').contents().find('body').append($('<link rel="stylesheet" href="../pure-nr-min.css" />'));
 									$('#content').show();
 									$(this).height(this.contentWindow.document.body.offsetHeight);
