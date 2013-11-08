@@ -47,7 +47,7 @@ Include in your project using:
 
 ### Download .phar
 
-Download [PhpConsole.phar](http://phpc/PhpConsole/examples/utils/build_phar.php?download). 
+Download [PhpConsole.phar](http://php-console.com/instance/examples/utils/build_phar.php?download).
 Include in your project using:
 
 	require_once('phar://path/to/PhpConsole.phar');
