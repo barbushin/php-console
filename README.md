@@ -53,7 +53,7 @@ Include in your project using:
 	require_once('phar://path/to/PhpConsole.phar');
 
 ### Yii Framework extension
-See https://github.com/barbushin/php-console-yii
+See http://www.yiiframework.com/extension/php-console
 
 # Usage
 
