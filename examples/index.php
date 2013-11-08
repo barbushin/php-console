@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Browser for PHP Console features examples in ./features directory
+ * Browser for PHP Console features examples & utils in ./features & ./utils directories
  *
  * You will need to install Google Chrome extension "PHP Console"
  * https://chrome.google.com/webstore/detail/nfhmhhlpfleoednkpnnnkolmclajemef
@@ -26,6 +26,7 @@ $features = array(
 	'old_version_adapter' => 'Old version adapter',
 );
 
+// List of scripts from ./utils directory
 $utils = array(
 	'build_phar' => 'Build PHAR',
 	'test_jump_to_file' => 'Test Jump to File',
