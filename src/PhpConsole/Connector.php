@@ -20,7 +20,7 @@ class Connector {
 	const SERVER_PROTOCOL = 5;
 	const SERVER_COOKIE = 'php-console-server';
 	const CLIENT_INFO_COOKIE = 'php-console-client';
-	const CLIENT_ENCODING = 'utf-8';
+	const CLIENT_ENCODING = 'UTF-8';
 	const HEADER_NAME = 'PHP-Console';
 	const POST_VAR_NAME = '__PHP_Console';
 	const SESSION_KEY = '__PHP_Console';
