@@ -40,7 +40,7 @@ class Connector {
 	/** @var  Dispatcher\Evaluate|null */
 	protected $evalDispatcher;
 	/** @var  string */
-	protected $serverEncoding = self::CLIENT_ENCODING;
+	protected $serverEncoding;
 	protected $sourcesBasePath;
 	protected $headersLimit;
 
