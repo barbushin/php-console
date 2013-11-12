@@ -20,7 +20,7 @@ class Connector {
 	const SERVER_PROTOCOL = 5;
 	const SERVER_COOKIE = 'php-console-server';
 	const CLIENT_INFO_COOKIE = 'php-console-client';
-	const CLIENT_ENCODING = 'utf-8';
+	const CLIENT_ENCODING = 'UTF-8';
 	const HEADER_NAME = 'PHP-Console';
 	const POST_VAR_NAME = '__PHP_Console';
 	const SESSION_KEY = '__PHP_Console';
@@ -39,8 +39,8 @@ class Connector {
 	protected $errorsDispatcher;
 	/** @var  Dispatcher\Evaluate|null */
 	protected $evalDispatcher;
-	/** @var  string|null */
-	protected $serverEncoding;
+	/** @var  string */
+	protected $serverEncoding = self::CLIENT_ENCODING;
 	protected $sourcesBasePath;
 	protected $headersLimit;
 
@@ -273,9 +273,7 @@ class Connector {
 			if($this->auth->getSignature($request['data']) !== $request['signature']) {
 				throw new \Exception('Wrong PHP Console eval request signature');
 			}
-			if($this->serverEncoding) {
-				$this->convertEncoding($request['data'], $this->serverEncoding, self::CLIENT_ENCODING);
-			}
+			$this->convertEncoding($request['data'], $this->serverEncoding, self::CLIENT_ENCODING);
 			$this->getEvalDispatcher()->dispatchCode($request['data']);
 			if($exitOnEval) {
 				exit;
@@ -308,9 +306,7 @@ class Connector {
 		if($this->auth) {
 			throw new \Exception('Password already defined');
 		}
-		if($this->serverEncoding) {
-			$this->convertEncoding($password, self::CLIENT_ENCODING, $this->serverEncoding);
-		}
+		$this->convertEncoding($password, self::CLIENT_ENCODING, $this->serverEncoding);
 		$this->auth = new Auth($password, $publicKeyByIp);
 		if($this->client) {
 			$this->isAuthorized = $this->client->auth && $this->auth->isValidAuth($this->client->auth);
@@ -355,7 +351,7 @@ class Connector {
 	 * @throws \Exception
 	 */
 	protected function convertEncoding(&$string, $toEncoding, $fromEncoding) {
-		if($string && is_string($string)) {
+		if($string && is_string($string) && $toEncoding != $fromEncoding) {
 			static $isMbString;
 			if($isMbString === null) {
 				$isMbString = extension_loaded('mbstring');
@@ -366,7 +362,7 @@ class Connector {
 			else {
 				$string = @iconv($fromEncoding, $toEncoding . '//IGNORE', $string) ? : $string;
 			}
-			if(!$string && $toEncoding == 'utf-8') {
+			if(!$string && $toEncoding == 'UTF-8') {
 				$string = utf8_encode($string);
 			}
 		}
@@ -386,15 +382,14 @@ class Connector {
 	}
 
 	/**
-	 * Set your server PHP internal encoding, if it's different from "mbstring.internal_encoding" or utf-8
+	 * Set your server PHP internal encoding, if it's different from "mbstring.internal_encoding" or UTF-8
 	 * @param $encoding
 	 */
 	public final function setServerEncoding($encoding) {
-		$encoding = strtolower($encoding);
-		if($encoding == 'utf8') {
-			$encoding = 'utf-8';
+		if($encoding == 'utf8' || $encoding == 'utf-8') {
+			$encoding = 'UTF-8'; // otherwise mb_convert_encoding() sometime fails with error(thanks to @alexborisov)
 		}
-		$this->serverEncoding = $encoding == self::CLIENT_ENCODING ? null : $encoding;
+		$this->serverEncoding = $encoding;
 	}
 
 	/**
@@ -489,7 +484,7 @@ class Connector {
 	}
 
 	protected function serializeResponse(DataObject $response) {
-		if($this->serverEncoding) {
+		if($this->serverEncoding != self::CLIENT_ENCODING) {
 			$this->objectToArray($response);
 			$this->convertArrayEncoding($response, self::CLIENT_ENCODING, $this->serverEncoding);
 		}
