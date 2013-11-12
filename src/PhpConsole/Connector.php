@@ -308,7 +308,9 @@ class Connector {
 		if($this->auth) {
 			throw new \Exception('Password already defined');
 		}
-		$this->convertEncoding($password, self::CLIENT_ENCODING, $this->serverEncoding);
+		if($this->serverEncoding) {
+			$this->convertEncoding($password, self::CLIENT_ENCODING, $this->serverEncoding);
+		}
 		$this->auth = new Auth($password, $publicKeyByIp);
 		if($this->client) {
 			$this->isAuthorized = $this->client->auth && $this->auth->isValidAuth($this->client->auth);
