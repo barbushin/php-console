@@ -75,11 +75,11 @@ class Connector {
 	}
 
 	/**
-	 * Detect script is running in CGI mode
+	 * Detect script is running in command-line mode
 	 * @return int
 	 */
-	protected function isCgiMode() {
-		return preg_match('~^(cgi|cli)~i', php_sapi_name());
+	protected function isCliMode() {
+		return PHP_SAPI == 'cli';
 	}
 
 	/**
@@ -87,7 +87,7 @@ class Connector {
 	 * @throws \Exception
 	 */
 	private final function initConnection() {
-		if($this->isCgiMode()) {
+		if($this->isCliMode()) {
 			return;
 		}
 
