@@ -165,7 +165,7 @@ PHP Console has multifunctional and smart vars dumper that allows to
 **Custom** call debug by user defined function
 
 	function d($var, $tags = null) {
-		\PhpConsole\Connector::getInstance()->getDebugDispatcher()->debug($var, $tags, 1);
+		\PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug(var, $tags, 1);
 	}
 	d($var, 'some.tags');
 
