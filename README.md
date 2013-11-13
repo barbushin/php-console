@@ -62,11 +62,11 @@ You can try most of PHP Console features on [live demo](http://php-console.com/i
 
 ## Connector
 
-There is a [\PhpConsole\Connector](src/PhpConsole/Connector.php) class that initializes connection between PHP server and Google Chrome extension. Connection is initalized when `\PhpConsole\Connector` instance is initialized:
+There is a [PhpConsole\Connector](src/PhpConsole/Connector.php) class that initializes connection between PHP server and Google Chrome extension. Connection is initalized when `PhpConsole\Connector` instance is initialized:
 
-	$connector = \PhpConsole\Connector::getInstance();
+	$connector = PhpConsole\Connector::getInstance();
 
-`\PhpConsole\Connector` uses headers to communicate with client, so it must be initialized before any output.
+`PhpConsole\Connector` uses headers to communicate with client, so it must be initialized before any output.
 
 ### Strip sources base path
 
@@ -112,7 +112,7 @@ So all PHP Console clients will be automatically redirected to HTTPS.
 
 [![ScreenShot](http://php-console.com/res/screenshot/errors_420.png)](http://php-console.com/instance/examples/#handle_errors)
 
-There is a [\PhpConsole\Handler](src/PhpConsole/Handler.php) class that initializes PHP errors & exceptions handlers and provides the next features:
+There is a [PhpConsole\Handler](src/PhpConsole/Handler.php) class that initializes PHP errors & exceptions handlers and provides the next features:
 
 * Handle PHP errors(+fatal & memory limit errors) and exceptions.
 * Ignore repeated errors.
@@ -120,7 +120,7 @@ There is a [\PhpConsole\Handler](src/PhpConsole/Handler.php) class that initiali
 * Handle caught exceptions using `$handler->handleException($exception)`.
 * Debug vars using `$handler->debug($var, 'some.tags')`.
 
-Initialize `\PhpConsole\Handler` in the top of your main project script:
+Initialize `PhpConsole\Handler` in the top of your main project script:
 
 	$handler = PhpConsole\Handler::getInstance();
 	/* You can override default Handler behavior:
@@ -149,15 +149,15 @@ PHP Console has multifunctional and smart vars dumper that allows to
 
 **Longest** native debug method call: 
 
-	\PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug($var, 'some.tags');`
+	PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug($var, 'some.tags');`
 
 **Shorter** call debug from Handler: 
 
-	\PhpConsole\Handler::getInstance()->debug($var, 'some.tags');
+	PhpConsole\Handler::getInstance()->debug($var, 'some.tags');
 
 **Shortest** call debug using global `PC` class
 
-	\PhpConsole\Helper::register(); // it will register global PC class
+	PhpConsole\Helper::register(); // it will register global PC class
 	// ...
 	PC::debug($var, 'tag');
 	PC::tag($var);
@@ -165,7 +165,7 @@ PHP Console has multifunctional and smart vars dumper that allows to
 **Custom** call debug by user defined function
 
 	function d($var, $tags = null) {
-		\PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug(var, $tags, 1);
+		PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug(var, $tags, 1);
 	}
 	d($var, 'some.tags');
 
@@ -203,7 +203,7 @@ PHP Console provide a way to execute PHP code on your server remotely, from Goog
 
 ## PSR-3 logger implementation
 
-There is PHP Console implementation of [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md) interface. to integrate PHP Console with PSR-3 compitable loggers(e.g. [Monolog](https://github.com/Seldaek/monolog)). See [\PhpConsole\PsrLogger](src/PhpConsole/PsrLogger.php).
+There is PHP Console implementation of [PSR-3](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md) interface. to integrate PHP Console with PSR-3 compitable loggers(e.g. [Monolog](https://github.com/Seldaek/monolog)). See [PhpConsole\PsrLogger](src/PhpConsole/PsrLogger.php).
 
 ## Jump to file
 
@@ -211,9 +211,9 @@ Read [this article](https://github.com/barbushin/php-console/wiki/Jump-to-file) 
 
 ## Easy migrate from PhpConsole `v1.x` to `v3.x`
 
-If you have used PhpConsole `v1.x` and want to migrate to `v3.x`  without any code changes, so just use [\PhpConsole\OldVersionAdapter](src/PhpConsole/OldVersionAdapter.php):
+If you have used PhpConsole `v1.x` and want to migrate to `v3.x`  without any code changes, so just use [PhpConsole\OldVersionAdapter](src/PhpConsole/OldVersionAdapter.php):
 
-	\PhpConsole\OldVersionAdapter::register(); // register PhpConsole v1.x class emulator
+	PhpConsole\OldVersionAdapter::register(); // register PhpConsole v1.x class emulator
 	
 	// Call old PhpConsole v1 methods as is
 	PhpConsole::start(true, true, $_SERVER['DOCUMENT_ROOT']);
@@ -223,8 +223,8 @@ If you have used PhpConsole `v1.x` and want to migrate to `v3.x`  without any co
 	PhpConsole::getInstance()->handleException(new Exception('test'));
 	
 	// Call new PhpConsole methods, if you want :)
-	\PhpConsole\Connector::getInstance()->setServerEncoding('cp1251');
-	\PhpConsole\Helper::register();
+	PhpConsole\Connector::getInstance()->setServerEncoding('cp1251');
+	PhpConsole\Helper::register();
 	PC::debug('Debug using new methods');
 
 But, anyway, if you can't migrate to new version of PHP Console because of using PHP < 5.3 on your servers, then you can use old [deprecated version](https://groups.google.com/forum/?hl=ru#!forum/php-console-deprecated-version) of PHP Console.
