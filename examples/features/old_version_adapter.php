@@ -2,7 +2,7 @@
 
 require_once(__DIR__ . '/../../src/PhpConsole/__autoload.php');
 
-\PhpConsole\OldVersionAdapter::register(); // register PhpConsole class emulator
+PhpConsole\OldVersionAdapter::register(); // register PhpConsole class emulator
 
 // Call old PhpConsole v1 methods as is
 PhpConsole::start(true, true, $_SERVER['DOCUMENT_ROOT']);
@@ -12,8 +12,8 @@ echo $undefinedVar;
 PhpConsole::getInstance()->handleException(new Exception('test'));
 
 // Call new PhpConsole methods, if you need :)
-\PhpConsole\Connector::getInstance()->setServerEncoding('cp1251');
-\PhpConsole\Helper::register();
+PhpConsole\Connector::getInstance()->setServerEncoding('cp1251');
+PhpConsole\Helper::register();
 PC::debug('Debug using new methods');
 
 echo 'So there is an easy way to migrate from PhpConsole v1.x to v3.x without any code changes';

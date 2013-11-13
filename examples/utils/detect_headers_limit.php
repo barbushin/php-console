@@ -32,6 +32,6 @@ while($testDiff && !($size > $testLimit && $isOk));
 Done.<br />
 Your server headers limit is <?= $size ?> bytes.<br />
 <br />
-Use it to configure PHP Console: <code>\PhpConsole\Connector::getInstance()->setHeadersLimit(<?= $size ?>);</code>
+Use it to configure PHP Console: <code>PhpConsole\Connector::getInstance()->setHeadersLimit(<?= $size ?>);</code>
 
 

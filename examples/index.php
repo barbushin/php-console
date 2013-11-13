@@ -40,7 +40,7 @@ if(isset($_GET['highlight']) && isset($features[$_GET['highlight']])) {
 }
 
 require_once(__DIR__ . '/../src/PhpConsole/__autoload.php');
-$isActiveClient = \PhpConsole\Connector::getInstance()->isActiveClient();
+$isActiveClient = PhpConsole\Connector::getInstance()->isActiveClient();
 
 ?>
 <html lang="en">
