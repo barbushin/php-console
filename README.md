@@ -88,8 +88,6 @@ PhpConsole server library is optimized for lazy initialization only for clients 
 
 ## Protect connection
 
-PHP Console provide different ways to protect
-
 ### Protect by password
 
 [![ScreenShot](http://php-console.com/res/screenshot/auth_420.png)](http://php-console.com/instance/examples/#protect_by_password)
