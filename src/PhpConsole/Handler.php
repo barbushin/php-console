@@ -168,7 +168,7 @@ class Handler {
 		$this->onHandlingStart();
 		$this->connector->getErrorsDispatcher()->dispatchError($code, $text, $file, $line, $skipCallsLevel + 1);
 		if($this->oldErrorsHandler && $this->callOldHandlers) {
-			call_user_func_array($this->oldErrorsHandler, array($code, $text, $file, $line));
+			call_user_func_array($this->oldErrorsHandler, array($code, $text, $file, $line, $context));
 		}
 		$this->onHandlingComplete();
 	}
