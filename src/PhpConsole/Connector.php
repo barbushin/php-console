@@ -537,7 +537,7 @@ class Connector {
 	 * @return array
 	 */
 	protected function &getSessionPostponedResponses() {
-		if(!session_id()) {
+		if(PHP_VERSION >= '5.4' ? session_status() != PHP_SESSION_ACTIVE : !session_id()) {
 			session_start();
 		}
 		if(!isset($_SESSION[static::SESSION_KEY]['postpone'])) {
