@@ -67,7 +67,7 @@ class Auth {
 	 * @return string
 	 */
 	protected function getClientUid() {
-		$clientUid = session_id();
+		$clientUid = '';
 		if($this->publicKeyByIp) {
 			if(isset($_SERVER['REMOTE_ADDR'])) {
 				$clientUid .= $_SERVER['REMOTE_ADDR'];
