@@ -1,6 +1,6 @@
 # PHP Console server library
 
-PHP Console allows you to handle PHP errors & excepions, dump variables, execute PHP code remotely and many other things using [Google Chrome extension PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) and [PhpConsole server library](https://github.com/barbushin/php-console).
+PHP Console allows you to handle PHP errors & exceptions, dump variables, execute PHP code remotely and many other things using [Google Chrome extension PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) and [PhpConsole server library](https://github.com/barbushin/php-console).
 
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/barbushin/php-console/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
@@ -55,6 +55,9 @@ Include in your project using:
 
 ### Yii Framework extension
 See http://www.yiiframework.com/extension/php-console
+
+### Drupal
+See https://drupal.org/project/pc (thanks to [@Chi-teck](https://github.com/Chi-teck))
 
 # Usage
 
