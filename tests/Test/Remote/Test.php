@@ -123,7 +123,7 @@ abstract class Test extends \PhpConsole\Test\Test {
 		parent::onNotSuccessfulTest($exception);
 	}
 
-	protected function getAuthPublicKey($secretKey = \PhpConsole\Test\SERVER_KEY, $publicKeyByIp = true, $clientIp = \PhpConsole\Test\CLIENT_IP) {
+	protected function getAuthPublicKey($secretKey = \PhpConsole\Test\SERVER_KEY, $publicKeyByIp = true, $clientIp = \PhpConsole\Test\LOCAL_IP) {
 		$request = new \PhpConsole\ClientEmulator\Request();
 		$request->setClientData(new \PhpConsole\Client(array(
 			'protocol' => \PhpConsole\Connector::SERVER_PROTOCOL
@@ -134,7 +134,7 @@ abstract class Test extends \PhpConsole\Test\Test {
 		return $response->package->auth->publicKey;
 	}
 
-	public function setRequestAuth($publicKey = null, $password = \PhpConsole\Test\SERVER_KEY, $publicKeyByIp = true, $clientIp = \PhpConsole\Test\CLIENT_IP) {
+	public function setRequestAuth($publicKey = null, $password = \PhpConsole\Test\SERVER_KEY, $publicKeyByIp = true, $clientIp = \PhpConsole\Test\LOCAL_IP) {
 		$auth = new \PhpConsole\Auth($password, $publicKeyByIp);
 		$_SERVER['REMOTE_ADDR'] = $clientIp;
 		$this->request->setClientData(new \PhpConsole\Client(array(
@@ -147,7 +147,7 @@ abstract class Test extends \PhpConsole\Test\Test {
 		return $auth;
 	}
 
-	protected function setConnectorAuth($password = \PhpConsole\Test\SERVER_KEY, $publicKeyByIp = true, $clientIp = \PhpConsole\Test\CLIENT_IP, \PhpConsole\ClientEmulator\Request $request = null) {
+	protected function setConnectorAuth($password = \PhpConsole\Test\SERVER_KEY, $publicKeyByIp = true, $clientIp = \PhpConsole\Test\LOCAL_IP, \PhpConsole\ClientEmulator\Request $request = null) {
 		$request = $request ? : $this->request;
 		$request->addScript('set_connector_auth', array(
 			'password' => $password,

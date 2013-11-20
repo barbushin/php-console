@@ -3,11 +3,12 @@
 namespace PhpConsole\Test;
 
 // Configure it up to your server
-const SERVER_URL = 'http://host.com/src/PhpConsole/tests/server.php'; // URL path to __DIR__ . '/server.php'
+const SERVER_URL = 'http://localhost/php-console/tests/server.php'; // URL path to __DIR__ . '/server.php'
 const SERVER_KEY = null; // some very very unique password :)
 
 // leave it as is
-const CLIENT_IP = '127.0.0.1';
+const LOCAL_IP = '127.0.0.1'; // local client IP
+const EXTERNAL_CONNECTIONS_ALLOWED = false; // allow SERVER_URL to be available only from local IP
 const BASE_DIR = __DIR__;
 
 if(!SERVER_URL || !SERVER_KEY) {
