@@ -56,9 +56,6 @@ Include in your project using:
 ### Yii Framework extension
 See http://www.yiiframework.com/extension/php-console
 
-### Drupal
-See https://drupal.org/project/pc (thanks to [@Chi-teck](https://github.com/Chi-teck))
-
 # Usage
 
 You can try most of PHP Console features on [live demo](http://php-console.com/instance/examples) server.
