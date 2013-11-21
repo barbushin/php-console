@@ -2,6 +2,8 @@
 
 namespace PhpConsole\Dispatcher;
 
+use PhpConsole\EvalResultMessage;
+
 /**
  * Executes client code and sends result data to connector as client expected messages
  *
@@ -54,7 +56,7 @@ class Evaluate extends \PhpConsole\Dispatcher {
 			$result = $this->evalProvider->evaluate($code);
 			ini_set('display_errors', $oldDisplayErrors);
 
-			$message = new \PhpConsole\EvalResultMessage();
+			$message = new EvalResultMessage();
 			$message->return = $this->dumper->dump($result->return);
 			$message->output = $this->dumper->dump($result->output);
 			$message->time = round($result->time, 6);
