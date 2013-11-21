@@ -539,6 +539,7 @@ class Connector {
 	protected function &getSessionPostponedResponses() {
 		if(PHP_VERSION >= '5.4' ? session_status() != PHP_SESSION_ACTIVE : !session_id()) {
 			session_start();
+			register_shutdown_function('session_write_close'); // force saving session data if session handler is overridden
 		}
 		if(!isset($_SESSION[static::SESSION_KEY]['postpone'])) {
 			$_SESSION[static::SESSION_KEY]['postpone'] = array();
