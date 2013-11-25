@@ -129,6 +129,17 @@ class Handler {
 	}
 
 	/**
+	 * Set custom errors handler level like E_ALL ^ E_STRICT
+	 * But, anyway, it's strongly recommended to configure ignore some errors type in PHP Console extension options
+	 * IMPORTANT: previously old error handler will be called only with new errors level
+	 * @param int $level see http://us1.php.net/manual/ru/function.error-reporting.php
+	 */
+	public function setErrorsHandlerLevel($level) {
+		$this->checkIsCalledBeforeStart();
+		$this->errorsHandlerLevel = $level;
+	}
+
+	/**
 	 * Override PHP errors handler to PHP Console handler
 	 */
 	protected function initErrorsHandler() {

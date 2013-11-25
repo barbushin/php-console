@@ -217,4 +217,19 @@ class Handler extends Test {
 		$this->handler->start();
 		$this->handler->handleException(new \Exception());
 	}
+
+	/**
+	 * @expectedException \Exception
+	 */
+	public function testSetErrorsHandlerLevelBeforeStartThrowsException() {
+		$this->handler->start();
+		$this->handler->setErrorsHandlerLevel(E_USER_NOTICE);
+	}
+
+	public function testSetErrorsHandlerLevel() {
+		$this->handler->setErrorsHandlerLevel(E_ALL ^ E_USER_NOTICE);
+		$this->handler->start();
+		trigger_error('hehe', E_USER_NOTICE);
+		$this->connector->expects($this->never())->method('sendMessage');
+	}
 }
