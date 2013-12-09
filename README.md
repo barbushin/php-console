@@ -79,9 +79,9 @@ If you want to see errors sources and traces paths more short, call:
 
 So paths like `/path/to/project/module/file.php` will be displayed on client as `/module/file.php`.
 
-### Work with different server encodings
+### Works with different server encodings
 
-If you internal server encoding is not UTF-8, so you need to call:
+If your internal server encoding is not UTF-8, so you need to call:
 
 	$connector->setServerEncoding('CP1251');
 
