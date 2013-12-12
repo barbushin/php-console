@@ -40,10 +40,7 @@ $phar->setStub('<?php
 Phar::mapPhar("PhpConsole");
 spl_autoload_register(function ($class) {
 	if(strpos($class, "PhpConsole") === 0) {
-		require_once("phar://$class.php");
-	}
-	elseif($class == "PC") {
-		require_once("phar://PhpConsole/Helper.php");
+		require_once("phar://". str_replace("\\\\", DIRECTORY_SEPARATOR, $class) . ".php");
 	}
 });
 __HALT_COMPILER();

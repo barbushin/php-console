@@ -51,7 +51,7 @@ Include in your project using:
 Download [PhpConsole.phar](http://php-console.com/instance/examples/utils/build_phar.php?download).
 Include in your project using:
 
-	require_once('phar://path/to/PhpConsole.phar'); // autoload will be initialized automatically
+	require_once('phar:///var/www/path-to/PhpConsole.phar'); // autoload will be initialized automatically
 
 ### Yii Framework extension
 See http://www.yiiframework.com/extension/php-console
