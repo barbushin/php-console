@@ -92,15 +92,15 @@ class Connector {
 		}
 
 		$this->initServerCookie();
-
 		$this->client = $this->initClient();
+
 		if($this->client) {
-			ob_start(); // required to prevent untimely headers sending
+			ob_start(null, null, defined('PHP_OUTPUT_HANDLER_FLUSHABLE') ? PHP_OUTPUT_HANDLER_FLUSHABLE : false); // required to prevent untimely headers sending
 			$this->isActiveClient = true;
 			$this->registerFlushOnShutDown();
 			$this->setHeadersLimit(isset($_SERVER['SERVER_SOFTWARE']) && stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false
-				? 4096 // headers limit for Nginx
-				: 8192 // headers limit for all other web-servers
+				? 4096 // default headers limit for Nginx
+				: 8192 // default headers limit for all other web-servers
 			);
 
 			$this->listenGetPostponedResponse();
