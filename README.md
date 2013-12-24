@@ -69,7 +69,7 @@ There is a [PhpConsole\Connector](src/PhpConsole/Connector.php) class that initi
 
 	$connector = PhpConsole\Connector::getInstance();
 
-`PhpConsole\Connector` uses headers to communicate with client, so it must be initialized before any output.
+`PhpConsole\Connector` uses headers to communicate with client, so it must be initialized before any output. Also there must be no `flush()` and `while(ob_get_level()) ob_end_clean();` calls and etc code flushing headers.
 
 ### Strip sources base path
 
