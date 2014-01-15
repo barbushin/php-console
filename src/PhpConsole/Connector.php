@@ -9,7 +9,7 @@ namespace PhpConsole;
  * https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef
  *
  * @package PhpConsole
- * @version 3.0
+ * @version 3.1
  * @link http://php-console.com
  * @author Sergey Barbushin http://linkedin.com/in/barbushin
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
@@ -22,14 +22,16 @@ class Connector {
 	const CLIENT_INFO_COOKIE = 'php-console-client';
 	const CLIENT_ENCODING = 'UTF-8';
 	const HEADER_NAME = 'PHP-Console';
+	const POSTPONE_HEADER_NAME = 'PHP-Console-Postpone';
 	const POST_VAR_NAME = '__PHP_Console';
-	const SESSION_KEY = '__PHP_Console';
 	const POSTPONE_REQUESTS_LIMIT = 10;
 	const PHP_HEADERS_SIZE = 1000; // maximum PHP response headers size
 	const CLIENT_HEADERS_LIMIT = 200000;
 
 	/** @var Connector */
 	protected static $instance;
+	/** @var  Storage|null */
+	private static $postponeStorage;
 
 	/** @var  Dumper|null */
 	protected $dumper;
@@ -40,7 +42,7 @@ class Connector {
 	/** @var  Dispatcher\Evaluate|null */
 	protected $evalDispatcher;
 	/** @var  string */
-	protected $serverEncoding;
+	protected $serverEncoding = self::CLIENT_ENCODING;
 	protected $sourcesBasePath;
 	protected $headersLimit;
 
@@ -50,6 +52,7 @@ class Connector {
 	private $auth;
 	/** @var Message[] */
 	private $messages = array();
+	private $postponeResponseId;
 	private $isSslOnlyMode = false;
 	private $isActiveClient = false;
 	private $isAuthorized = false;
@@ -64,6 +67,29 @@ class Connector {
 			self::$instance = new static();
 		}
 		return self::$instance;
+	}
+
+	/**
+	 * Set storage for postponed response data. Storage\Session is used by default, but if you have problems with overridden session handler you should use another one.
+	 * IMPORTANT: This method cannot be called after Connector::getInstance()
+	 * @param Storage $storage
+	 * @throws \Exception
+	 */
+	public static function setPostponeStorage(Storage $storage) {
+		if(self::$instance) {
+			throw new \Exception(__METHOD__ . ' can be called only before ' . __CLASS__ . '::getInstance()');
+		}
+		static::$postponeStorage = $storage;
+	}
+
+	/**
+	 * @return Storage
+	 */
+	private final function getPostponeStorage() {
+		if(!static::$postponeStorage) {
+			static::$postponeStorage = new Storage\Session();
+		}
+		return static::$postponeStorage;
 	}
 
 	protected function __construct() {
@@ -102,8 +128,8 @@ class Connector {
 				? 4096 // default headers limit for Nginx
 				: 8192 // default headers limit for all other web-servers
 			);
-
 			$this->listenGetPostponedResponse();
+			$this->postponeResponseId = $this->setPostponeHeader();
 		}
 	}
 
@@ -463,17 +489,31 @@ class Connector {
 
 			$responseData = $this->serializeResponse($response);
 
-			if(strlen($responseData) > $this->headersLimit) {
-				$responseData = $this->serializeResponse(new PostponedResponse(array(
-					'id' => $this->postponeResponse($responseData)
-				)));
+			if(strlen($responseData) > $this->headersLimit || !$this->setHeaderData($responseData, self::HEADER_NAME, false)) {
+				$this->getPostponeStorage()->push($this->postponeResponseId, $responseData);
 			}
-
-			if(headers_sent($file, $line)) {
-				throw new \Exception('Unable to process response data, headers already sent in ' . $file . ':' . $line . '. Try to use ob_start()');
-			}
-			header(self::HEADER_NAME . ': ' . $responseData);
 		}
+	}
+
+	private final function setPostponeHeader() {
+		$postponeResponseId = mt_rand() . mt_rand() . mt_rand();
+		$this->setHeaderData($this->serializeResponse(
+			new PostponedResponse(array(
+				'id' => $postponeResponseId
+			))
+		), self::POSTPONE_HEADER_NAME, true);
+		return $postponeResponseId;
+	}
+
+	private final function setHeaderData($responseData, $headerName, $throwException = true) {
+		if(headers_sent($file, $line)) {
+			if($throwException) {
+				throw new \Exception('Unable to process response data, headers already sent in ' . $file . ':' . $line . '. Try to use ob_start() and don\'t use flush().');
+			}
+			return false;
+		}
+		header($headerName . ': ' . $responseData);
+		return true;
 	}
 
 	protected function objectToArray(&$var) {
@@ -497,54 +537,10 @@ class Connector {
 	private final function listenGetPostponedResponse() {
 		if(isset($_POST[self::POST_VAR_NAME]['getPostponedResponse'])) {
 			header('Content-Type: application/json; charset=' . self::CLIENT_ENCODING);
-			echo $this->getPostponedResponse($_POST[self::POST_VAR_NAME]['getPostponedResponse']);
+			echo $this->getPostponeStorage()->pop($_POST[self::POST_VAR_NAME]['getPostponedResponse']);
 			$this->breakClientConnection();
 			exit;
 		}
-	}
-
-	/**
-	 * Store postponed response data
-	 * @param string $responseData
-	 * @return string id
-	 */
-	protected function postponeResponse($responseData) {
-		$responses =& $this->getSessionPostponedResponses();
-		while(count($responses) >= static::POSTPONE_REQUESTS_LIMIT) {
-			array_shift($responses);
-		}
-		$id = mt_rand() . mt_rand();
-		$responses[$id] = $responseData;
-		return $id;
-	}
-
-	/**
-	 * Get postponed response data by id
-	 * @param string $responseId
-	 * @return string|null
-	 */
-	protected function getPostponedResponse($responseId) {
-		$responses =& $this->getSessionPostponedResponses();
-		if(isset($responses[$responseId])) {
-			$responseData = $responses[$responseId];
-			unset($responses[$responseId]);
-			return $responseData;
-		}
-	}
-
-	/**
-	 * Returns reference to postponed responses array in $_SESSION
-	 * @return array
-	 */
-	protected function &getSessionPostponedResponses() {
-		if(PHP_VERSION >= '5.4' ? session_status() != PHP_SESSION_ACTIVE : !session_id()) {
-			session_start();
-			register_shutdown_function('session_write_close'); // force saving session data if session handler is overridden
-		}
-		if(!isset($_SESSION[static::SESSION_KEY]['postpone'])) {
-			$_SESSION[static::SESSION_KEY]['postpone'] = array();
-		}
-		return $_SESSION[static::SESSION_KEY]['postpone'];
 	}
 }
 

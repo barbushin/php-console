@@ -65,11 +65,24 @@ You can try most of PHP Console features on [live demo](http://php-console.com/i
 
 ## Connector
 
-There is a [PhpConsole\Connector](src/PhpConsole/Connector.php) class that initializes connection between PHP server and Google Chrome extension. Connection is initalized when `PhpConsole\Connector` instance is initialized:
+There is a [PhpConsole\Connector](src/PhpConsole/Connector.php) class that initializes connection between PHP server and Google Chrome extension. Connection is initalized when [PhpConsole\Connector](src/PhpConsole/Connector.php) instance is initialized:
 
 	$connector = PhpConsole\Connector::getInstance();
 
-`PhpConsole\Connector` uses headers to communicate with client, so it must be initialized before any output. Also there must be no `flush()` and `while(ob_get_level()) ob_end_clean();` calls and etc code flushing headers.
+Also it will be initialized when you call `PhpConsole\Handler::getInstance()` or `PhpConsole\Helper::register()`.
+
+### Communication protocol
+
+PHP Console uses headers to communicate with client, so `PhpConsole\Connector::getInstance()` or `PhpConsole\Handler::getInstance()` must be called before any output. If headers are sent before script shut down or PHP Console response package size is out of web-server headers size limit, then PHP Console will store response data in [PhpConsole\Storage](src/PhpConsole/Storage.php) implementation and send it to client in STDOUT, in additional HTTP request. So there is no limits in PHP Console response package size.
+
+### Troubleshooting with $_SESSION handler overridden in some frameworks
+
+By default PHP Console uses [PhpConsole\Storage\Session](src/PhpConsole/Storage/Session.php) for postponed responses, so all temporary data will be stored in `$_SESSION`. But there is some problem with frameworks like [Symfony](http://symfony.com) and [Laravel](http://laravel.com) that overrides PHP session handler. In this case you should use any other [PhpConsole\Storage](src/PhpConsole/Storage.php) implementation like:
+
+	// Can be called only before PhpConsole\Connector::getInstance() and PhpConsole\Handler::getInstance()
+	PhpConsole\Connector::setPostponeStorage(new PhpConsole\Storage\File('/tmp/pc.data'));
+
+See all available [PhpConsole\Storage](src/PhpConsole/Storage.php) implementations in [/src/PhpConsole/Storage](src/PhpConsole/Storage).
 
 ### Strip sources base path
 

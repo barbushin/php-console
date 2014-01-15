@@ -6,7 +6,7 @@ namespace PhpConsole;
  * Abstract class of dispatchers that sends different kind data to connector as client expected messages
  *
  * @package PhpConsole
- * @version 3.0
+ * @version 3.1
  * @link http://php-console.com
  * @author Sergey Barbushin http://linkedin.com/in/barbushin
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.

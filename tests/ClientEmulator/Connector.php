@@ -159,7 +159,13 @@ class Connector {
 	protected function parseHeaderData($headersData) {
 		if(preg_match_all('/\n\s*' . preg_quote(\PhpConsole\Connector::HEADER_NAME) . '\s*:\s*(.*?)[\r\n]/', $headersData, $m)) {
 			if(count($m[1]) > 1) {
-				throw new \Exception('There is more than one PHP Console header');
+				throw new \Exception('There is more than one "' . \PhpConsole\Connector::HEADER_NAME . '" header');
+			}
+			return rawurldecode($m[1][0]);
+		}
+		elseif(preg_match_all('/\n\s*' . preg_quote(\PhpConsole\Connector::POSTPONE_HEADER_NAME) . '\s*:\s*(.*?)[\r\n]/', $headersData, $m)) {
+			if(count($m[1]) > 1) {
+				throw new \Exception('There is more than one "' . \PhpConsole\Connector::POSTPONE_HEADER_NAME . '" header');
 			}
 			return rawurldecode($m[1][0]);
 		}
