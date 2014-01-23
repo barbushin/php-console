@@ -18,8 +18,8 @@ class Memcache extends ExpiringKeyValue {
 	protected $memcache;
 
 	public function __construct($host = 'localhost', $port = 11211) {
-		$memcache = new \Memcache();
-		if(!$memcache->connect($host, $port)) {
+		$this->memcache = new \Memcache();
+		if(!$this->memcache->connect($host, $port)) {
 			throw new \Exception('Unable to connect to Memcache server');
 		}
 	}
