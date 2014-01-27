@@ -121,7 +121,7 @@ class Connector {
 		$this->client = $this->initClient();
 
 		if($this->client) {
-			ob_start(null, null, defined('PHP_OUTPUT_HANDLER_FLUSHABLE') ? PHP_OUTPUT_HANDLER_FLUSHABLE : false); // required to prevent untimely headers sending
+			ob_start();
 			$this->isActiveClient = true;
 			$this->registerFlushOnShutDown();
 			$this->setHeadersLimit(isset($_SERVER['SERVER_SOFTWARE']) && stripos($_SERVER['SERVER_SOFTWARE'], 'nginx') !== false
@@ -401,7 +401,7 @@ class Connector {
 	 */
 	public final function setHeadersLimit($bytes) {
 		if($bytes < static::PHP_HEADERS_SIZE) {
-			throw new \Exception('Headers limit cannot be less then ' . __CLASS__ . '::PHP_HEADERS_SIZE. You need to reconfigure your web server');
+			throw new \Exception('Headers limit cannot be less then ' . __CLASS__ . '::PHP_HEADERS_SIZE');
 		}
 		$bytes -= static::PHP_HEADERS_SIZE;
 		$this->headersLimit = $bytes < static::CLIENT_HEADERS_LIMIT ? $bytes : static::CLIENT_HEADERS_LIMIT;
