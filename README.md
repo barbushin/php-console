@@ -1,8 +1,8 @@
 # PHP Console server library
 
-PHP Console allows you to handle PHP errors & exceptions, dump variables, execute PHP code remotely and many other things using [Google Chrome extension PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) and [PhpConsole server library](https://github.com/barbushin/php-console).
+[![Latest Stable Version](https://poser.pugx.org/php-console/php-console/version.png)](https://packagist.org/packages/php-console/php-console) [![Composer Installs](https://poser.pugx.org/php-console/php-console/d/total.png)](https://packagist.org/packages/php-console/php-console) [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/barbushin/php-console/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/barbushin/php-console/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+PHP Console allows you to handle PHP errors & exceptions, dump variables, execute PHP code remotely and many other things using [Google Chrome extension PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) and [PhpConsole server library](https://github.com/barbushin/php-console).
 
 ### Overview
 
@@ -163,7 +163,7 @@ PHP Console has multifunctional and smart vars dumper that allows to
 
 **Longest** native debug method call: 
 
-	PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug($var, 'some.tags');`
+	PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug($var, 'some.tags');
 
 **Shorter** call debug from Handler: 
 
@@ -179,7 +179,7 @@ PHP Console has multifunctional and smart vars dumper that allows to
 **Custom** call debug by user defined function
 
 	function d($var, $tags = null) {
-		PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug(var, $tags, 1);
+		PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug($var, $tags, 1);
 	}
 	d($var, 'some.tags');
 

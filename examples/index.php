@@ -7,7 +7,7 @@
  * https://chrome.google.com/webstore/detail/nfhmhhlpfleoednkpnnnkolmclajemef
  *
  * @see http://github.com/barbushin/php-console
- * @version 3.0
+ * @version 3.1
  * @author Sergey Barbushin http://linkedin.com/in/barbushin
  * @license http://opensource.org/licenses/BSD-3-Clause "BSD 3-Clause License"
  * @copyright © Sergey Barbushin, 2013. Some rights reserved.
