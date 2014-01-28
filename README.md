@@ -25,7 +25,7 @@ PHP Console allows you to handle PHP errors & exceptions, dump variables, execut
 
 	{
 		"require": {
-			"php-console/php-console": "dev-master"
+			"php-console/php-console": "3.*"
 		}
 	}
 
