@@ -234,7 +234,7 @@ class Handler {
 	 * @param int $skipTraceCalls Number of proxy methods between original "debug method call" and this method call
 	 */
 	public function debug($data, $tags = null, $skipTraceCalls = 0) {
-		if($this->isStarted) {
+		if($this->connector->isActiveClient()) {
 			$this->connector->getDebugDispatcher()->dispatchDebug($data, $tags, $skipTraceCalls + 1);
 		}
 	}
