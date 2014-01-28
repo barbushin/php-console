@@ -53,8 +53,11 @@ Include in your project using:
 
 	require_once('phar:///var/www/path-to/PhpConsole.phar'); // autoload will be initialized automatically
 
-### Yii Framework extension
+### Yii framework extension
 See http://www.yiiframework.com/extension/php-console
+
+### Laravel framework service provider
+See https://github.com/barbushin/php-console-laravel
 
 ### Drupal CMS module
 See https://drupal.org/project/pc (thanks to [@Chi-teck](https://github.com/Chi-teck))
