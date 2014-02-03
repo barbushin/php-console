@@ -96,7 +96,7 @@ class Connector {
 
 		$response = new Response();
 		$response->code = $code;
-		$response->output = $postponedResponseId ? $postponedOutput : $responseOutput;
+		$response->output = (string)($postponedResponseId ? $postponedOutput : $responseOutput);
 		$response->headerData = $this->parseHeaderData($responseHeaders);
 		$response->cookies = $this->parseCookies($responseHeaders);
 

@@ -79,17 +79,17 @@ class Connector {
 		if(self::$instance) {
 			throw new \Exception(__METHOD__ . ' can be called only before ' . __CLASS__ . '::getInstance()');
 		}
-		static::$postponeStorage = $storage;
+		self::$postponeStorage = $storage;
 	}
 
 	/**
 	 * @return Storage
 	 */
 	private final function getPostponeStorage() {
-		if(!static::$postponeStorage) {
-			static::$postponeStorage = new Storage\Session();
+		if(!self::$postponeStorage) {
+			self::$postponeStorage = new Storage\Session();
 		}
-		return static::$postponeStorage;
+		return self::$postponeStorage;
 	}
 
 	protected function __construct() {
@@ -280,9 +280,10 @@ class Connector {
 	 * Use Connector::getInstance()->setAllowedIpMasks() for additional access protection
 	 * Check Connector::getInstance()->getEvalDispatcher()->getEvalProvider() to customize eval accessibility & security options
 	 * @param bool $exitOnEval
+	 * @param bool $flushDebugMessages Clear debug messages handled before this method is called
 	 * @throws \Exception
 	 */
-	public final function startEvalRequestsListener($exitOnEval = true) {
+	public final function startEvalRequestsListener($exitOnEval = true, $flushDebugMessages = true) {
 		if(!$this->auth) {
 			throw new \Exception('Eval dispatcher is allowed only in password protected mode. See PhpConsole\Connector::getInstance()->setPassword(...)');
 		}
@@ -298,6 +299,13 @@ class Connector {
 			}
 			if($this->auth->getSignature($request['data']) !== $request['signature']) {
 				throw new \Exception('Wrong PHP Console eval request signature');
+			}
+			if($flushDebugMessages) {
+				foreach($this->messages as $i => $message) {
+					if($message instanceof DebugMessage) {
+						unset($this->messages[$i]);
+					}
+				}
 			}
 			$this->convertEncoding($request['data'], $this->serverEncoding, self::CLIENT_ENCODING);
 			$this->getEvalDispatcher()->dispatchCode($request['data']);
