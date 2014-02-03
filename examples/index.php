@@ -51,59 +51,58 @@ $isActiveClient = PhpConsole\Connector::getInstance()->isActiveClient();
 	<link rel="stylesheet" href="styles.css" />
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<script>
-		window.addEventListener('load', function() {
-			if(typeof jQuery === 'undefined') {
-				alert('Internet connection required to load JQuery to use examples browser. You can run examples offline manually from ./features & ./utils');
-				return;
-			}
+		if(typeof jQuery == 'undefined') {
+			alert('Internet connection required to load JQuery to use examples browser. You can run examples offline manually from ./features & ./utils');
+		}
+		else {
+			$(function() {
+				function initMenuItems(items, group, showSource) {
+					for(var alias in items) {
+						$('#' + group).append($('<a>', {href: '#' + alias, text: items[alias], class: 'link', id: alias})
+							.click(function() {
+								var uri = group + '/' + this.id + '.php';
 
-			function initMenuItems(items, group, showSource) {
-				for(var alias in items) {
-					$('#' + group).append($('<a>', {href: '#' + alias, text: items[alias], class: 'link', id: alias})
-						.click(function() {
-							var uri = group + '/' + this.id + '.php';
+								$('#content').hide();
+								$('#outputTitle').text(this.text);
+								$('#sourceCodeLink').text('./' + uri).attr('href', uri);
+								$('a').removeClass('active');
+								$(this).addClass('active');
+								console.clear();
 
-							$('#content').hide();
-							$('#outputTitle').text(this.text);
-							$('#sourceCodeLink').text('./' + uri).attr('href', uri);
-							$('a').removeClass('active');
-							$(this).addClass('active');
-							console.clear();
+								if(showSource) {
+									$('#sourceCode').html('').load('?highlight=' + this.id).show();
+								}
+								else {
+									$('#sourceCode').hide();
+								}
 
-							if(showSource) {
-								$('#sourceCode').html('').load('?highlight=' + this.id).show();
-							}
-							else {
-								$('#sourceCode').hide();
-							}
+								$('#outputIFrame').height(0).attr('src', uri)
+									.load(function() {
+										if(this.contentWindow != 'DOMException') {
+											$(this).contents().find('body').append($('<link rel="stylesheet" href="//xpart.ru/_share/pure-nr-min.css" />'));
+											$('#content').show();
+											$(this).height(this.contentWindow.document.body.offsetHeight);
+										}
+										else {
+											$('#content').show();
+										}
+									});
 
-							$('#outputIFrame').height(0).attr('src', uri)
-								.load(function() {
-									if(this.contentWindow != 'DOMException') {
-										$(this).contents().find('body').append($('<link rel="stylesheet" href="//xpart.ru/_share/pure-nr-min.css" />'));
-										$('#content').show();
-										$(this).height(this.contentWindow.document.body.offsetHeight);
-									}
-									else {
-										$('#content').show();
-									}
-								});
-
-							window.location.hash = '#' + this.id;
-							window.scrollTo(0, 0);
-							return false;
-						}));
+								window.location.hash = '#' + this.id;
+								window.scrollTo(0, 0);
+								return false;
+							}));
+					}
 				}
-			}
 
-			initMenuItems(<?= json_encode($features) ?>, 'features', true);
-			initMenuItems(<?= json_encode($utils) ?>, 'utils');
+				initMenuItems(<?= json_encode($features) ?>, 'features', true);
+				initMenuItems(<?= json_encode($utils) ?>, 'utils');
 
-			if(window.location.hash) {
-				$('#' + window.location.hash.substr(1)).trigger('click');
-			}
-
-		}, false);
+				if(window.location.hash) {
+					$('#' + window.location.hash.substr(1)).trigger('click');
+				}
+			});
+		}
 	</script>
 </head>
 <body>
