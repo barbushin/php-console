@@ -19,7 +19,8 @@
 		"php": ">=5.3.0"
 	},
 	"suggest": {
-		"php-console/laravel-service-provider": "*"
+		"php-console/laravel-service-provider": "*",
+		"php-console/silex-service-provider": "*"
 	},
 	"autoload": {
 		"psr-0": {
