@@ -56,8 +56,8 @@ Include in your project using:
 ### Yii framework extension
 See http://www.yiiframework.com/extension/php-console
 
-### Silex framework service provider (thanks to [@Chi-teck](https://github.com/Chi-teck))
-See https://github.com/barbushin/php-console-silex
+### Silex framework service provider
+See https://github.com/barbushin/php-console-silex (thanks to [@Chi-teck](https://github.com/Chi-teck))
 
 ### Laravel framework service provider
 See https://github.com/barbushin/php-console-laravel
