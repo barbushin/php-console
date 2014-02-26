@@ -4,6 +4,8 @@
 
 PHP Console allows you to handle PHP errors & exceptions, dump variables, execute PHP code remotely and many other things using [Google Chrome extension PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) and [PhpConsole server library](https://github.com/barbushin/php-console).
 
+**ATTENTION:** OS X users, please report if [this bug](https://github.com/barbushin/php-console/issues/44) is reproducible on your Mac. Thak you!
+
 ### Overview
 
 * See presentation [video](http://www.youtube.com/watch?v=_4kG-Zrs2Io).
