@@ -24,7 +24,7 @@ class Connector {
 	const HEADER_NAME = 'PHP-Console';
 	const POSTPONE_HEADER_NAME = 'PHP-Console-Postpone';
 	const POST_VAR_NAME = '__PHP_Console';
-	const POSTPONE_REQUESTS_LIMIT = 10;
+	const POSTPONE_REQUESTS_LIMIT = 2;
 	const PHP_HEADERS_SIZE = 1000; // maximum PHP response headers size
 	const CLIENT_HEADERS_LIMIT = 200000;
 
