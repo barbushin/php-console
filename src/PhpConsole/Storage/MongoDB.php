@@ -60,7 +60,11 @@ class MongoDB extends ExpiringKeyValue {
 	 * @return string
 	 */
 	protected function get($key) {
-		return $this->mongoCollection->findOne(array('key' => $key));
+		$record = $this->mongoCollection->findOne(array('key' => $key));
+		if ($record && is_array($record) && array_key_exists('data', $record)) {
+			return $record['data'];
+		}
+		return '';
 	}
 
 	/**
