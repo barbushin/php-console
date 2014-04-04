@@ -19,17 +19,20 @@ class MongoDB extends ExpiringKeyValue {
 	/** @var  \MongoCollection */
 	protected $mongoCollection;
 
-	public function __construct($server = 'mongodb://localhost:27017', $db='phpconsole', $collection='phpconsole') {
-		if(!($this->mongoClient = new \MongoClient($server))) {
+	public function __construct($server = 'mongodb://localhost:27017', $db = 'phpconsole', $collection = 'phpconsole') {
+		$this->mongoClient = new \MongoClient($server);
+		if(!$this->mongoClient) {
 			throw new \Exception('Unable to connect to MongoDB server');
 		}
-		if(!($this->mongoCollection = $this->mongoClient->selectCollection($db, $collection))) {
+
+		$this->mongoCollection = $this->mongoClient->selectCollection($db, $collection);
+		if(!$this->mongoCollection) {
 			throw new \Exception('Unable to get collection');
 		}
 
 		$this->mongoCollection->ensureIndex(array(
 			'expireAt' => 1,
-		),array(
+		), array(
 			'background' => true,
 			'name' => 'TTL',
 			'expireAfterSeconds' => 0,
@@ -45,11 +48,11 @@ class MongoDB extends ExpiringKeyValue {
 	protected function set($key, $data, $expire) {
 		$this->mongoCollection->update(array(
 			'key' => $key
-		),array(
+		), array(
 			'key' => $key,
 			'data' => $data,
-			'expireAt' => new \MongoDate(time()+$expire)
-		),array(
+			'expireAt' => new \MongoDate(time() + $expire)
+		), array(
 			'upsert' => true
 		));
 	}
@@ -61,10 +64,9 @@ class MongoDB extends ExpiringKeyValue {
 	 */
 	protected function get($key) {
 		$record = $this->mongoCollection->findOne(array('key' => $key));
-		if ($record && is_array($record) && array_key_exists('data', $record)) {
+		if($record && is_array($record) && array_key_exists('data', $record)) {
 			return $record['data'];
 		}
-		return '';
 	}
 
 	/**
