@@ -1,7 +1,5 @@
 # PHP Console server library
 
-[![Latest Stable Version](https://poser.pugx.org/php-console/php-console/version.png)](https://packagist.org/packages/php-console/php-console) [![Composer Installs](https://poser.pugx.org/php-console/php-console/d/total.png)](https://packagist.org/packages/php-console/php-console)
-
 PHP Console allows you to handle PHP errors & exceptions, dump variables, execute PHP code remotely and many other things using [Google Chrome extension PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) and [PhpConsole server library](https://github.com/barbushin/php-console).
 
 ### Overview
