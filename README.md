@@ -51,6 +51,10 @@ Include in your project using:
 
 	require_once('phar:///var/www/path-to/PhpConsole.phar'); // autoload will be initialized automatically
 
+
+### Symfony framework bundle
+See https://github.com/Vitre/php-console-bundle
+
 ### Yii framework extension
 See http://www.yiiframework.com/extension/php-console
 
