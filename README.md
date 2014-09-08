@@ -2,8 +2,6 @@
 
 PHP Console allows you to handle PHP errors & exceptions, dump variables, execute PHP code remotely and many other things using [Google Chrome extension PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) and [PhpConsole server library](https://github.com/barbushin/php-console).
 
-[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/barbushin/php-console/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
 ### Overview
 
 * See presentation [video](http://www.youtube.com/watch?v=_4kG-Zrs2Io).
@@ -25,7 +23,7 @@ PHP Console allows you to handle PHP errors & exceptions, dump variables, execut
 
 	{
 		"require": {
-			"php-console/php-console": "dev-master"
+			"php-console/php-console": "3.*"
 		}
 	}
 
@@ -53,8 +51,18 @@ Include in your project using:
 
 	require_once('phar:///var/www/path-to/PhpConsole.phar'); // autoload will be initialized automatically
 
-### Yii Framework extension
+
+### Symfony framework bundle
+See https://github.com/Vitre/php-console-bundle
+
+### Yii framework extension
 See http://www.yiiframework.com/extension/php-console
+
+### Silex framework service provider
+See https://github.com/barbushin/php-console-silex (thanks to [@Chi-teck](https://github.com/Chi-teck))
+
+### Laravel framework service provider
+See https://github.com/barbushin/php-console-laravel
 
 ### Drupal CMS module
 See https://drupal.org/project/pc (thanks to [@Chi-teck](https://github.com/Chi-teck))
@@ -65,11 +73,24 @@ You can try most of PHP Console features on [live demo](http://php-console.com/i
 
 ## Connector
 
-There is a [PhpConsole\Connector](src/PhpConsole/Connector.php) class that initializes connection between PHP server and Google Chrome extension. Connection is initalized when `PhpConsole\Connector` instance is initialized:
+There is a [PhpConsole\Connector](src/PhpConsole/Connector.php) class that initializes connection between PHP server and Google Chrome extension. Connection is initalized when [PhpConsole\Connector](src/PhpConsole/Connector.php) instance is initialized:
 
 	$connector = PhpConsole\Connector::getInstance();
 
-`PhpConsole\Connector` uses headers to communicate with client, so it must be initialized before any output.
+Also it will be initialized when you call `PhpConsole\Handler::getInstance()` or `PhpConsole\Helper::register()`.
+
+### Communication protocol
+
+PHP Console uses headers to communicate with client, so `PhpConsole\Connector::getInstance()` or `PhpConsole\Handler::getInstance()` must be called before any output. If headers are sent before script shut down or PHP Console response package size is out of web-server headers size limit, then PHP Console will store response data in [PhpConsole\Storage](src/PhpConsole/Storage.php) implementation and send it to client in STDOUT, in additional HTTP request. So there is no limits in PHP Console response package size.
+
+### Troubleshooting with $_SESSION handler overridden in some frameworks
+
+By default PHP Console uses [PhpConsole\Storage\Session](src/PhpConsole/Storage/Session.php) for postponed responses, so all temporary data will be stored in `$_SESSION`. But there is some problem with frameworks like [Symfony](http://symfony.com) and [Laravel](http://laravel.com) that overrides PHP session handler. In this case you should use any other [PhpConsole\Storage](src/PhpConsole/Storage.php) implementation like:
+
+	// Can be called only before PhpConsole\Connector::getInstance() and PhpConsole\Handler::getInstance()
+	PhpConsole\Connector::setPostponeStorage(new PhpConsole\Storage\File('/tmp/pc.data'));
+
+See all available [PhpConsole\Storage](src/PhpConsole/Storage.php) implementations in [/src/PhpConsole/Storage](src/PhpConsole/Storage).
 
 ### Strip sources base path
 
@@ -150,7 +171,7 @@ PHP Console has multifunctional and smart vars dumper that allows to
 
 **Longest** native debug method call: 
 
-	PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug($var, 'some.tags');`
+	PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug($var, 'some.tags');
 
 **Shorter** call debug from Handler: 
 
@@ -166,7 +187,7 @@ PHP Console has multifunctional and smart vars dumper that allows to
 **Custom** call debug by user defined function
 
 	function d($var, $tags = null) {
-		PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug(var, $tags, 1);
+		PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug($var, $tags, 1);
 	}
 	d($var, 'some.tags');
 

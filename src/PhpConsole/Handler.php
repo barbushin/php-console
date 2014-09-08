@@ -10,7 +10,7 @@ namespace PhpConsole;
  * https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef
  *
  * @package PhpConsole
- * @version 3.0
+ * @version 3.1
  * @link http://php-console.com
  * @author Sergey Barbushin http://linkedin.com/in/barbushin
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
@@ -234,7 +234,7 @@ class Handler {
 	 * @param int $skipTraceCalls Number of proxy methods between original "debug method call" and this method call
 	 */
 	public function debug($data, $tags = null, $skipTraceCalls = 0) {
-		if($this->isStarted) {
+		if($this->connector->isActiveClient()) {
 			$this->connector->getDebugDispatcher()->dispatchDebug($data, $tags, $skipTraceCalls + 1);
 		}
 	}

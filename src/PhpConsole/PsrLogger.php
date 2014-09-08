@@ -9,7 +9,7 @@ use Psr\Log\LogLevel;
  * IMPORTANT: https://github.com/php-fig/log must be installed & autoloaded
  *
  * @package PhpConsole
- * @version 3.0
+ * @version 3.1
  * @link http://php-console.com
  * @author Sergey Barbushin http://linkedin.com/in/barbushin
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.

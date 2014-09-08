@@ -70,11 +70,6 @@ class Handler extends Test {
 		$this->handler->start();
 	}
 
-	public function testNoStartNoDebugHandling() {
-		$this->connector->expects($this->never())->method('sendMessage');
-		$this->handler->debug(123);
-	}
-
 	public function testNoStartNoErrorsHandling() {
 		$this->connector->expects($this->never())->method('sendMessage');
 		$this->handler->handleError(1);

@@ -23,7 +23,7 @@ namespace PhpConsole {
 	 * IMPORTANT: This adapter will be removed in PhpConsole > v3, so it's strongly recommended to migrate your code using original PhpConsole v3 methods
 	 *
 	 * @package PhpConsole
-	 * @version 3.0
+	 * @version 3.1
 	 * @link http://php-console.com
 	 * @author Sergey Barbushin http://linkedin.com/in/barbushin
 	 * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.

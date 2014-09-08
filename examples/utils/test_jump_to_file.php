@@ -3,21 +3,25 @@
 	<meta charset="utf-8" />
 	<title>PHP Console usage examples</title>
 	<link rel="stylesheet" href="../styles.css" />
-	<script src="../jquery-2.0.3.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 	<script type="text/javascript">
-		$(function () {
-			$('#testButton').click(function () {
-				var link = document.createElement('a');
-				link.setAttribute('href', 'editor://open/?file='
-					+ encodeURIComponent($('#editorTestPath').val().trim())
-					+ '&line='
-					+ encodeURIComponent($('#editorTestLine').val().trim())
-				);
-				link.click();
-				return false;
+		if(typeof jQuery == 'undefined') {
+			alert('Internet connection required to load JQuery to use examples browser. You can run examples offline manually from ./features & ./utils');
+		}
+		else {
+			$(function () {
+				$('#testButton').click(function () {
+					var link = document.createElement('a');
+					link.setAttribute('href', 'editor://open/?file='
+						+ encodeURIComponent($('#editorTestPath').val().trim())
+						+ '&line='
+						+ encodeURIComponent($('#editorTestLine').val().trim())
+					);
+					link.click();
+					return false;
+				});
 			});
-		})
-		;
+		}
 	</script>
 </head>
 <body>

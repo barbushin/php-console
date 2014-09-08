@@ -65,6 +65,34 @@ class Evaluate extends Test {
 		)));
 	}
 
+	public function testFlushDebugMessagesEnabled() {
+		$this->setConnectorAuth();
+		$this->request->addScript('set_connector_eval_enabled');
+		$this->setRequestEval('return 123');
+		$this->sendRequest();
+		$this->assertRandomMessageInResponse(false);
+	}
+
+	public function testFlushDebugMessagesDisabled() {
+		$this->setConnectorAuth();
+		$this->request->addScript('set_connector_eval_enabled', array(
+			'flushDebugMessages' => false
+		));
+		$this->setRequestEval('return 123');
+		$this->sendRequest();
+		$this->assertRandomMessageInResponse();
+	}
+
+	public function testExitOnEvalDisabled() {
+		$this->randomOutputMustPresentInResponse = true;
+		$this->setConnectorAuth();
+		$this->request->addScript('set_connector_eval_enabled', array(
+			'exitOnEval' => false
+		));
+		$this->setRequestEval('return 123');
+		$this->sendRequest();
+	}
+
 	public function testNoEvalIfAuthFails() {
 		$this->setConnectorAuth('oops');
 		$this->request->addScript('set_connector_eval_enabled');
