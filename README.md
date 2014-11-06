@@ -53,19 +53,22 @@ Include in your project using:
 
 
 ### Symfony framework bundle
-See https://github.com/Vitre/php-console-bundle
+https://github.com/Vitre/php-console-bundle
 
 ### Yii framework extension
-See http://www.yiiframework.com/extension/php-console
+http://www.yiiframework.com/extension/php-console
 
 ### Silex framework service provider
-See https://github.com/barbushin/php-console-silex (thanks to [@Chi-teck](https://github.com/Chi-teck))
+https://github.com/barbushin/php-console-silex (thanks to [@Chi-teck](https://github.com/Chi-teck))
 
 ### Laravel framework service provider
-See https://github.com/barbushin/php-console-laravel
+https://github.com/barbushin/php-console-laravel
 
 ### Drupal CMS module
-See https://drupal.org/project/pc (thanks to [@Chi-teck](https://github.com/Chi-teck))
+https://drupal.org/project/pc (thanks to [@Chi-teck](https://github.com/Chi-teck))
+
+### WordPress plugin
+https://github.com/nekojira/wp-php-console (thanks to [@nekojira](https://github.com/nekojira))
 
 # Usage
 
