@@ -79,4 +79,8 @@ class PsrLogger extends \Psr\Log\Test\LoggerInterfaceTest {
 		$this->assertInstanceOf('PhpConsole\ErrorMessage', $message);
 		$message->data = 'exception message';
 	}
+
+	public function testContextExceptionKeyCanBeExceptionOrOtherValues() {
+		$this->markTestSkipped('Stupid PSR issue that will not be implemented in PHP Console');
+	}
 }

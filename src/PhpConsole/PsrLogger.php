@@ -35,10 +35,17 @@ class PsrLogger extends \Psr\Log\AbstractLogger {
 	protected $connector;
 	/** @var  Dumper */
 	protected $contextDumper;
+	protected $ignoreTraceCalls;
 
-	public function __construct(Connector $connector = null, Dumper $contextDumper = null) {
-		$this->connector = $connector ? : Connector::getInstance();
-		$this->contextDumper = $contextDumper ? : $this->connector->getDumper();
+	/**
+	 * @param Connector|null $connector
+	 * @param Dumper|null $contextDumper
+	 * @param int|array $ignoreTraceCalls Ignore tracing classes by name prefix `array('PhpConsole')` or fixed number of calls to ignore
+	 */
+	public function __construct(Connector $connector = null, Dumper $contextDumper = null, $ignoreTraceCalls = 1) {
+		$this->connector = $connector ?: Connector::getInstance();
+		$this->contextDumper = $contextDumper ?: $this->connector->getDumper();
+		$this->ignoreTraceCalls = $ignoreTraceCalls;
 	}
 
 	/**
@@ -52,14 +59,14 @@ class PsrLogger extends \Psr\Log\AbstractLogger {
 		$message = $this->fetchMessageContext($message, $context);
 
 		if(isset(static::$debugLevels[$level])) {
-			$this->connector->getDebugDispatcher()->dispatchDebug($message, static::$debugLevels[$level], null);
+			$this->connector->getDebugDispatcher()->dispatchDebug($message, static::$debugLevels[$level], $this->ignoreTraceCalls);
 		}
 		elseif(isset(static::$errorsLevels[$level])) {
 			if(isset($context['exception']) && $context['exception'] instanceof \Exception) {
 				$this->connector->getErrorsDispatcher()->dispatchException($context['exception']);
 			}
 			else {
-				$this->connector->getErrorsDispatcher()->dispatchError(static::$errorsLevels[$level], $message, null, null, null);
+				$this->connector->getErrorsDispatcher()->dispatchError(static::$errorsLevels[$level], $message, null, null, $this->ignoreTraceCalls);
 			}
 		}
 		else {

@@ -70,14 +70,43 @@ class Dispatcher_Debug extends Dispatcher {
 				$test->assertEquals(new \PhpConsole\TraceCall(array(
 					'file' => __FILE__,
 					'line' => $lastCallLine,
-					'call' => $message->data['class'] . '->' . $message->data['method'] . '(' . $lastCallLine . ', NULL, true, \'01234567890123...\', Array[2], stdClass)'
+					'call' => $message->data['method'] . '(' . $lastCallLine . ', NULL, true, \'01234567890123...\', Array[2], stdClass)'
 				)), end($message->trace));
 				return true;
 			}));
-		$this->callDispatchDebug($lastCallLine = __LINE__, null, true, '0123456789012345', array(1, 2), new \stdClass());
+
+		$dispatcher = $this->dispatcher;
+		$func = function () use ($dispatcher) {
+			$dispatcher->dispatchDebug(array('method' => __FUNCTION__, 'line' => __LINE__));
+		};
+		$func($lastCallLine = __LINE__, null, true, '0123456789012345', array(1, 2), new \stdClass());
 	}
 
-	protected function callDispatchDebug() {
-		$this->dispatcher->dispatchDebug(array('class' => get_class($this), 'method' => __FUNCTION__, 'line' => __LINE__));
+	public function testIgnoreCallsByNumber() {
+		$test = $this;
+		$actualTraceCalls = count(debug_backtrace());
+		$ignoreTraceCalls = 3;
+		$this->dispatcher->detectTraceAndSource = true;
+		$this->connector->expects($this->once())
+			->method('sendMessage')
+			->with($this->callback(function (\PhpConsole\DebugMessage $message) use ($test, $ignoreTraceCalls, $actualTraceCalls) {
+				$test->assertEquals($actualTraceCalls - $ignoreTraceCalls, count($message->trace));
+				return true;
+			}));
+		$this->dispatcher->dispatchDebug(null, null, $ignoreTraceCalls);
+	}
+
+	public function testIgnoreCallsByClassNames() {
+		$test = $this;
+		$actualTraceCalls = count(debug_backtrace());
+		$ignoreTraceClasses = array('PhpConsole\Test', 'ReflectionMethod');
+		$this->dispatcher->detectTraceAndSource = true;
+		$this->connector->expects($this->once())
+			->method('sendMessage')
+			->with($this->callback(function (\PhpConsole\DebugMessage $message) use ($test, $ignoreTraceClasses, $actualTraceCalls) {
+				$test->assertEquals($actualTraceCalls - count($ignoreTraceClasses), count($message->trace));
+				return true;
+			}));
+		$this->dispatcher->dispatchDebug(null, null, $ignoreTraceClasses);
 	}
 }

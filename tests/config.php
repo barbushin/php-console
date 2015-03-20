@@ -2,9 +2,9 @@
 
 namespace PhpConsole\Test;
 
-// Configure it up to your server
-const SERVER_URL = 'http://localhost/php-console/tests/server.php'; // URL path to __DIR__ . '/server.php'
-const SERVER_KEY = null; // some very very unique password :)
+// Set actual to your server values
+const SERVER_URL = ''; // URL path to __DIR__ . '/server.php'
+const SERVER_KEY = ''; // some random string like kudhu1h3918da
 
 // leave it as is
 const LOCAL_IP = '127.0.0.1'; // local client IP
@@ -33,8 +33,10 @@ spl_autoload_register(function ($class) {
 	}
 });
 
-if(!class_exists('PHPUnit_Framework_TestCase')) {
-	require_once(__DIR__ . '/vendor/autoload.php');
+$composerAutoloadPath = __DIR__ . '/vendor/autoload.php';
+if(!file_exists($composerAutoloadPath)) {
+	throw new \Exception('Test vendors not found. Run `composer install` in /tests directory');
 }
 
+require_once($composerAutoloadPath);
 require_once(__DIR__ . '/../src/PhpConsole/__autoload.php');

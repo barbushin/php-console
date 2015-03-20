@@ -13,7 +13,6 @@
          stopOnIncomplete="true"
          stopOnSkipped="false"
          bootstrap="./bootstrap.php"
-         strict="false"
          verbose="true"
 	>
 

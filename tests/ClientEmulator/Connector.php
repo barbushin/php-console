@@ -60,8 +60,8 @@ class Connector {
 
 		$curlOptions = array(
 			CURLOPT_URL => $url . '?signature=' . $this->getPostDataSignature($rawPostData),
-			CURLOPT_CONNECTTIMEOUT => 100,
-			CURLOPT_TIMEOUT => 100,
+			CURLOPT_CONNECTTIMEOUT => 2,
+			CURLOPT_TIMEOUT => 5,
 			CURLOPT_HEADER => true,
 			CURLOPT_POST => true,
 			CURLOPT_POSTFIELDS => $rawPostData,

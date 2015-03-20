@@ -57,16 +57,27 @@ abstract class Dispatcher {
 	 * @param array $trace Standard PHP backtrace array
 	 * @param null|string $file Reference to var that will contain source file path
 	 * @param null|string $line Reference to var that will contain source line number
-	 * @param int $skipTraceCalls Last trace calls that will be stripped in result
+	 * @param int|array $ignoreTraceCalls Ignore tracing classes by name prefix `array('PhpConsole')` or fixed number of calls to ignore
 	 * @return TraceCall[]
 	 */
-	protected function fetchTrace(array $trace, &$file = null, &$line = null, $skipTraceCalls = 0) {
+	protected function fetchTrace(array $trace, &$file = null, &$line = null, $ignoreTraceCalls = 0) {
+		$ignoreByNumber = is_numeric($ignoreTraceCalls) ? $ignoreTraceCalls : 0;
+		$ignoreByClassPrefixes = is_array($ignoreTraceCalls) ? array_merge($ignoreTraceCalls, array(__NAMESPACE__)) : null;
+
 		foreach($trace as $i => $call) {
-			if(!$file && $i == $skipTraceCalls && isset($call['file'])) {
+			if(!$file && $i == $ignoreTraceCalls && isset($call['file'])) {
 				$file = $call['file'];
 				$line = $call['line'];
 			}
-			if($i < $skipTraceCalls || (isset($call['file']) && $call['file'] == $file && $call['line'] == $line)) {
+			if($ignoreByClassPrefixes && isset($call['class'])) {
+				foreach($ignoreByClassPrefixes as $classPrefix) {
+					if(strpos($call['class'], $classPrefix) !== false) {
+						unset($trace[$i]);
+						continue;
+					}
+				}
+			}
+			if($i < $ignoreByNumber || (isset($call['file']) && $call['file'] == $file && $call['line'] == $line)) {
 				unset($trace[$i]);
 			}
 		}

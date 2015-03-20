@@ -21,17 +21,17 @@ class Debug extends \PhpConsole\Dispatcher {
 	 * Send debug data message to client
 	 * @param mixed $data
 	 * @param null|string $tags Tags separated by dot, e.g. "low.db.billing"
-	 * @param null|int $callLevel Number of proxy methods between original "debug call" and this method call
+	 * @param int|array $ignoreTraceCalls Ignore tracing classes by name prefix `array('PhpConsole')` or fixed number of calls to ignore
 	 */
-	public function dispatchDebug($data, $tags = null, $callLevel = 0) {
+	public function dispatchDebug($data, $tags = null, $ignoreTraceCalls = 0) {
 		if($this->isActive()) {
 			$message = new \PhpConsole\DebugMessage();
 			$message->data = $this->dumper->dump($data);
 			if($tags) {
 				$message->tags = explode('.', $tags);
 			}
-			if($this->detectTraceAndSource && $callLevel !== null) {
-				$message->trace = $this->fetchTrace(debug_backtrace(), $message->file, $message->line, $callLevel);
+			if($this->detectTraceAndSource && $ignoreTraceCalls !== null) {
+				$message->trace = $this->fetchTrace(debug_backtrace(), $message->file, $message->line, $ignoreTraceCalls);
 			}
 			$this->sendMessage($message);
 		}

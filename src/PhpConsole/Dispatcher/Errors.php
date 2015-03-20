@@ -49,9 +49,9 @@ class Errors extends \PhpConsole\Dispatcher {
 	 * @param null|string $text
 	 * @param null|string $file
 	 * @param null|integer $line
-	 * @param null|int $callLevel Number of proxy methods between original "error handler method" and this method call
+	 * @param int|array $ignoreTraceCalls Ignore tracing classes by name prefix `array('PhpConsole')` or fixed number of calls to ignore
 	 */
-	public function dispatchError($code = null, $text = null, $file = null, $line = null, $callLevel = 0) {
+	public function dispatchError($code = null, $text = null, $file = null, $line = null, $ignoreTraceCalls = 0) {
 		if($this->isActive()) {
 			$message = new \PhpConsole\ErrorMessage();
 			$message->code = $code;
@@ -59,8 +59,8 @@ class Errors extends \PhpConsole\Dispatcher {
 			$message->data = $this->dumper->dump($text);
 			$message->file = $file;
 			$message->line = $line;
-			if($callLevel !== null) {
-				$message->trace = $this->fetchTrace(debug_backtrace(), $file, $line, $callLevel + 1);
+			if($ignoreTraceCalls !== null) {
+				$message->trace = $this->fetchTrace(debug_backtrace(), $file, $line, is_array($ignoreTraceCalls) ? $ignoreTraceCalls : $ignoreTraceCalls + 1);
 			}
 			$this->sendMessage($message);
 		}

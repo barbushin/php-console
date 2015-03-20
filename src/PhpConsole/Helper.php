@@ -86,11 +86,11 @@ namespace PhpConsole {
 		 * Analog of Handler::getInstance()->debug(...) method
 		 * @param mixed $data
 		 * @param string|null $tags Tags separated by dot, e.g. "low.db.billing"
-		 * @param int $skipTraceCalls Number of proxy methods between original "debug method call" and this method call
+		 * @param int|array $ignoreTraceCalls Ignore tracing classes by name prefix `array('PhpConsole')` or fixed number of calls to ignore
 		 */
-		public static function debug($data, $tags = null, $skipTraceCalls = 0) {
+		public static function debug($data, $tags = null, $ignoreTraceCalls = 0) {
 			if(self::$isActive) {
-				self::$connector->getDebugDispatcher()->dispatchDebug($data, $tags, $skipTraceCalls + 1);
+				self::$connector->getDebugDispatcher()->dispatchDebug($data, $tags, is_numeric($ignoreTraceCalls) ? $ignoreTraceCalls + 1 : $ignoreTraceCalls);
 			}
 		}
 
