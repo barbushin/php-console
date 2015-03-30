@@ -85,7 +85,7 @@ class Connector {
 	/**
 	 * @return Storage
 	 */
-	private final function getPostponeStorage() {
+	private function getPostponeStorage() {
 		if(!self::$postponeStorage) {
 			self::$postponeStorage = new Storage\Session();
 		}
@@ -112,7 +112,7 @@ class Connector {
 	 * Notify clients that there is active PHP Console on server & check if there is request from client with active PHP Console
 	 * @throws \Exception
 	 */
-	private final function initConnection() {
+	private function initConnection() {
 		if($this->isCliMode()) {
 			return;
 		}
@@ -138,7 +138,7 @@ class Connector {
 	 * @return Client|null
 	 * @throws \Exception
 	 */
-	private final function initClient() {
+	private function initClient() {
 		if(isset($_COOKIE[self::CLIENT_INFO_COOKIE])) {
 			$clientData = @json_decode(base64_decode($_COOKIE[self::CLIENT_INFO_COOKIE], true), true);
 			if(!$clientData) {
@@ -157,7 +157,7 @@ class Connector {
 	 * Notify clients that there is active PHP Console on server
 	 * @throws \Exception
 	 */
-	private final function initServerCookie() {
+	private function initServerCookie() {
 		if(!isset($_COOKIE[self::SERVER_COOKIE]) || $_COOKIE[self::SERVER_COOKIE] != self::SERVER_PROTOCOL) {
 			$isSuccess = setcookie(self::SERVER_COOKIE, self::SERVER_PROTOCOL, null, '/');
 			if(!$isSuccess) {
@@ -283,7 +283,7 @@ class Connector {
 	 * @param bool $flushDebugMessages Clear debug messages handled before this method is called
 	 * @throws \Exception
 	 */
-	public final function startEvalRequestsListener($exitOnEval = true, $flushDebugMessages = true) {
+	public function startEvalRequestsListener($exitOnEval = true, $flushDebugMessages = true) {
 		if(!$this->auth) {
 			throw new \Exception('Eval dispatcher is allowed only in password protected mode. See PhpConsole\Connector::getInstance()->setPassword(...)');
 		}
@@ -320,7 +320,7 @@ class Connector {
 	 * @param $sourcesBasePath
 	 * @throws \Exception
 	 */
-	public final function setSourcesBasePath($sourcesBasePath) {
+	public function setSourcesBasePath($sourcesBasePath) {
 		$sourcesBasePath = realpath($sourcesBasePath);
 		if(!$sourcesBasePath) {
 			throw new \Exception('Path "' . $sourcesBasePath . '" not found');
@@ -336,7 +336,7 @@ class Connector {
 	 * @param bool $publicKeyByIp Set authorization token depending on client IP
 	 * @throws \Exception
 	 */
-	public final function setPassword($password, $publicKeyByIp = true) {
+	public function setPassword($password, $publicKeyByIp = true) {
 		if($this->auth) {
 			throw new \Exception('Password already defined');
 		}
@@ -407,7 +407,7 @@ class Connector {
 	 * @param $bytes
 	 * @throws \Exception
 	 */
-	public final function setHeadersLimit($bytes) {
+	public function setHeadersLimit($bytes) {
 		if($bytes < static::PHP_HEADERS_SIZE) {
 			throw new \Exception('Headers limit cannot be less then ' . __CLASS__ . '::PHP_HEADERS_SIZE');
 		}
@@ -419,7 +419,7 @@ class Connector {
 	 * Set your server PHP internal encoding, if it's different from "mbstring.internal_encoding" or UTF-8
 	 * @param $encoding
 	 */
-	public final function setServerEncoding($encoding) {
+	public function setServerEncoding($encoding) {
 		if($encoding == 'utf8' || $encoding == 'utf-8') {
 			$encoding = 'UTF-8'; // otherwise mb_convert_encoding() sometime fails with error(thanks to @alexborisov)
 		}
@@ -439,7 +439,7 @@ class Connector {
 	/**
 	 * Register shut down callback handler. Must be called after all errors handlers register_shutdown_function()
 	 */
-	public final function registerFlushOnShutDown() {
+	public function registerFlushOnShutDown() {
 		$this->registeredShutDowns++;
 		register_shutdown_function(array($this, 'onShutDown'));
 	}
@@ -473,7 +473,7 @@ class Connector {
 	 * Send response data to client
 	 * @throws \Exception
 	 */
-	private final function proceedResponsePackage() {
+	private function proceedResponsePackage() {
 		if($this->isActiveClient()) {
 			$response = new Response();
 			$response->isSslOnlyMode = $this->isSslOnlyMode;
@@ -503,7 +503,7 @@ class Connector {
 		}
 	}
 
-	private final function setPostponeHeader() {
+	private function setPostponeHeader() {
 		$postponeResponseId = mt_rand() . mt_rand() . mt_rand();
 		$this->setHeaderData($this->serializeResponse(
 			new PostponedResponse(array(
@@ -513,7 +513,7 @@ class Connector {
 		return $postponeResponseId;
 	}
 
-	private final function setHeaderData($responseData, $headerName, $throwException = true) {
+	private function setHeaderData($responseData, $headerName, $throwException = true) {
 		if(headers_sent($file, $line)) {
 			if($throwException) {
 				throw new \Exception('Unable to process response data, headers already sent in ' . $file . ':' . $line . '. Try to use ob_start() and don\'t use flush().');
@@ -542,7 +542,7 @@ class Connector {
 	/**
 	 * Check if there is postponed response request and dispatch it
 	 */
-	private final function listenGetPostponedResponse() {
+	private function listenGetPostponedResponse() {
 		if(isset($_POST[self::POST_VAR_NAME]['getPostponedResponse'])) {
 			header('Content-Type: application/json; charset=' . self::CLIENT_ENCODING);
 			echo $this->getPostponeStorage()->pop($_POST[self::POST_VAR_NAME]['getPostponedResponse']);
