@@ -177,7 +177,7 @@ class Connector {
 	/**
 	 * Set client connection as not active
 	 */
-	protected function breakClientConnection() {
+	public function disable() {
 		$this->isActiveClient = false;
 	}
 
@@ -203,7 +203,7 @@ class Connector {
 					}
 				}
 			}
-			$this->breakClientConnection();
+			$this->disable();
 		}
 	}
 
@@ -546,7 +546,7 @@ class Connector {
 		if(isset($_POST[self::POST_VAR_NAME]['getPostponedResponse'])) {
 			header('Content-Type: application/json; charset=' . self::CLIENT_ENCODING);
 			echo $this->getPostponeStorage()->pop($_POST[self::POST_VAR_NAME]['getPostponedResponse']);
-			$this->breakClientConnection();
+			$this->disable();
 			exit;
 		}
 	}
