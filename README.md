@@ -76,7 +76,7 @@ Also it will be initialized when you call `PhpConsole\Handler::getInstance()` or
 
 ### Communication protocol
 
-PHP Console uses headers to communicate with client, so `PhpConsole\Connector::getInstance()` or `PhpConsole\Handler::getInstance()` must be called before any output. If headers are sent before script shut down or PHP Console response package size is out of web-server headers size limit, then PHP Console will store response data in [PhpConsole\Storage](src/PhpConsole/Storage.php) implementation and send it to client in STDOUT, in additional HTTP request. So there is no limits in PHP Console response package size.
+PHP Console uses headers to communicate with client, so `PhpConsole\Connector::getInstance()` or `PhpConsole\Handler::getInstance()` must be called before any output. If headers are sent before script shut down or PHP Console response package size is out of web-server headers size limit, then PHP Console will store response data in [PhpConsole\Storage](src/PhpConsole/Storage.php) implementation and send it to client in STDOUT, in additional HTTP request. So there is no limit in PHP Console response package size.
 
 ### Troubleshooting with $_SESSION handler overridden in some frameworks
 
@@ -113,7 +113,7 @@ PhpConsole server library is optimized for lazy initialization only for clients 
 
 	$connector->setPassword('yohoho123', true);
 
-Clients will need to enter password to get access to PHP Console server data. All passwords are stored on client as SHA-256 hashes. Second argument says that PHP Console authorization token will depends on client IP.
+Clients will need to enter a password to get access to PHP Console server data. All passwords are stored on client as SHA-256 hashes. Second argument says that the PHP Console authorization token will depend on the client IP.
 
 ### SSL only connection mode
 
@@ -131,7 +131,7 @@ So all PHP Console clients will be automatically redirected to HTTPS.
 
 There is a [PhpConsole\Handler](src/PhpConsole/Handler.php) class that initializes PHP errors & exceptions handlers and provides the next features:
 
-* Handle PHP errors(+fatal & memory limit errors) and exceptions.
+* Handle PHP errors (+fatal & memory limit errors) and exceptions.
 * Ignore repeated errors.
 * Call previously defined errors and exceptions handlers.
 * Handle caught exceptions using `$handler->handleException($exception)`.
