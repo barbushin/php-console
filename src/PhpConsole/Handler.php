@@ -173,7 +173,7 @@ class Handler {
 	 * @param int|array $ignoreTraceCalls Ignore tracing classes by name prefix `array('PhpConsole')` or fixed number of calls to ignore
 	 */
 	public function handleError($code = null, $text = null, $file = null, $line = null, $context = null, $ignoreTraceCalls = 0) {
-		if(!$this->isStarted || error_reporting() === 0 || $this->isHandlingDisabled()) {
+		if(!$this->isStarted || error_reporting() === 0 || $this->isHandlingDisabled() || ($this->errorsHandlerLevel && !($code & $this->errorsHandlerLevel))) {
 			return;
 		}
 		$this->onHandlingStart();
