@@ -1,9 +1,3 @@
-# IMPORTANT NOTICE
-
-There was some misunderstanding with Chrome Web Store policy auditors. They going to restore extension in a few days.
-
-But for now you can use this version https://chrome.google.com/webstore/detail/pjlgfjdeemcagkbhcdnffmjcagnbnhme
-
 # PHP Console server library
 
 PHP Console allows you to handle PHP errors & exceptions, dump variables, execute PHP code remotely and many other things using [Google Chrome extension PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) and [PhpConsole server library](https://github.com/barbushin/php-console).
