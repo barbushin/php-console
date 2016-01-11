@@ -60,7 +60,7 @@ https://github.com/barbushin/php-console-laravel
 https://drupal.org/project/pc (thanks to [@Chi-teck](https://github.com/Chi-teck))
 
 ### WordPress plugin
-https://github.com/nekojira/wp-php-console (thanks to [@nekojira](https://github.com/nekojira))
+https://github.com/unfulvio/wp-php-console (thanks to [@nekojira](https://github.com/unfulvio))
 
 # Usage
 
