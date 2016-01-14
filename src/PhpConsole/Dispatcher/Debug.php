@@ -16,6 +16,9 @@ class Debug extends \PhpConsole\Dispatcher {
 
 	/** @var bool Autodetect and append trace data to debug */
 	public $detectTraceAndSource = false;
+	
+	/** @var bool Set the maximum number of traces displayed */
+	public $maxTraceCalls = 0;
 
 	/**
 	 * Send debug data message to client
@@ -30,9 +33,23 @@ class Debug extends \PhpConsole\Dispatcher {
 			if($tags) {
 				$message->tags = explode('.', $tags);
 			}
+			
 			if($this->detectTraceAndSource && $ignoreTraceCalls !== null) {
-				$message->trace = $this->fetchTrace(debug_backtrace(), $message->file, $message->line, $ignoreTraceCalls);
+				
+				$debug_backtrace = debug_backtrace();
+				if($ignoreTraceCalls == 0 && $this->maxTraceCalls > 0)
+				{
+					$ignoreTraceCalls = count($debug_backtrace) - $this->maxTraceCalls;
+				}
+				
+				if($ignoreTraceCalls > count($debug_backtrace) || $ignoreTraceCalls < 0)
+				{
+					$ignoreTraceCalls = 0;
+				}
+			
+				$message->trace = $this->fetchTrace($debug_backtrace, $message->file, $message->line, $ignoreTraceCalls);
 			}
+			
 			$this->sendMessage($message);
 		}
 	}
