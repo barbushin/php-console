@@ -97,7 +97,7 @@ namespace PhpConsole {
 			$this->getHandler()->handleError($code, $message, $file, $line, null, 1);
 		}
 
-		public function handleException(\Exception $exception) {
+		public function handleException(\Throwable $exception) {
 			$this->getHandler()->handleException($exception);
 		}
 

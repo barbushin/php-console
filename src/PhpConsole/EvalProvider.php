@@ -41,7 +41,7 @@ class EvalProvider {
 		try {
 			$result->return = static::executeCode($code, $this->sharedVars);
 		}
-		catch(\Exception $exception) {
+		catch(\Throwable $exception) {
 			$result->exception = $exception;
 		}
 		$result->time = abs(microtime(true) - $startTime - $selfTime);

@@ -62,7 +62,7 @@ class PsrLogger extends \Psr\Log\AbstractLogger {
 			$this->connector->getDebugDispatcher()->dispatchDebug($message, static::$debugLevels[$level], $this->ignoreTraceCalls);
 		}
 		elseif(isset(static::$errorsLevels[$level])) {
-			if(isset($context['exception']) && $context['exception'] instanceof \Exception) {
+			if(isset($context['exception']) && $context['exception'] instanceof \Throwable) {
 				$this->connector->getErrorsDispatcher()->dispatchException($context['exception']);
 			}
 			else {
