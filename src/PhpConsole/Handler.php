@@ -208,9 +208,9 @@ class Handler {
 
 	/**
 	 * Handle exception object
-	 * @param \Exception $exception
+	 * @param \Exception|\Throwable $exception
 	 */
-	public function handleException(\Exception $exception) {
+	public function handleException($exception) {
 		if(!$this->isStarted || $this->isHandlingDisabled()) {
 			return;
 		}
@@ -220,6 +220,9 @@ class Handler {
 			if($this->oldExceptionsHandler && $this->callOldHandlers) {
 				call_user_func($this->oldExceptionsHandler, $exception);
 			}
+		}
+		catch(\Throwable $internalException) {
+			$this->handleException($internalException);
 		}
 		catch(\Exception $internalException) {
 			$this->handleException($internalException);

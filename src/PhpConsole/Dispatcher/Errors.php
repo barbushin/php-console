@@ -68,9 +68,9 @@ class Errors extends \PhpConsole\Dispatcher {
 
 	/**
 	 * Send exception message to client
-	 * @param \Exception $exception
+	 * @param \Exception|\Throwable $exception
 	 */
-	public function dispatchException(\Exception $exception) {
+	public function dispatchException($exception) {
 		if($this->isActive()) {
 			if($this->dispatchPreviousExceptions && $exception->getPrevious()) {
 				$this->dispatchException($exception->getPrevious());

@@ -41,6 +41,9 @@ class EvalProvider {
 		try {
 			$result->return = static::executeCode($code, $this->sharedVars);
 		}
+		catch(\Throwable $exception) {
+			$result->exception = $exception;
+		}
 		catch(\Exception $exception) {
 			$result->exception = $exception;
 		}
