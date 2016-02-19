@@ -107,24 +107,21 @@ class EvalProvider {
 
 	/**
 	 * Execute code with shared vars
-	 * @param $code
-	 * @param array $sharedVars
+	 * @param $_code
+	 * @param array $_sharedVars
 	 * @return mixed
 	 */
-	protected static function executeCode($code, array $sharedVars) {
-		unset($code);
-		unset($sharedVars);
-
-		foreach(func_get_arg(1) as $var => $value) {
+	protected static function executeCode($_code, array $_sharedVars) {
+		foreach($_sharedVars as $var => $value) {
 			if(isset($GLOBALS[$var]) && $var[0] == '_') { // extract($this->sharedVars, EXTR_OVERWRITE) and $$var = $value do not overwrites global vars
 				$GLOBALS[$var] = $value;
 			}
-			else {
+			elseif(!isset($$var)) {
 				$$var = $value;
 			}
 		}
 
-		return eval(func_get_arg(0));
+		return eval($_code);
 	}
 
 	/**
