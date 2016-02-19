@@ -214,7 +214,6 @@ class EvalProvider {
 	 * @param $name
 	 * @param $var
 	 * @throws \Exception
-	 * @internal param bool $asReference
 	 */
 	public function addSharedVar($name, $var) {
 		$this->addSharedVarReference($name, $var);
@@ -225,7 +224,6 @@ class EvalProvider {
 	 * @param $name
 	 * @param $var
 	 * @throws \Exception
-	 * @internal param bool $asReference
 	 */
 	public function addSharedVarReference($name, &$var) {
 		if(isset($this->sharedVars[$name])) {

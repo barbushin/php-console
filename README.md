@@ -31,13 +31,6 @@ Or
 
 	$ composer require php-console/php-console ~3.0
 
-### PHAR
-
-Download [PhpConsole.phar](http://php-console.com/instance/examples/utils/build_phar.php?download).
-Include in your project using:
-
-	require_once('phar:///var/www/path-to/PhpConsole.phar'); // autoload will be initialized automatically
-
 ### Monolog handler
 https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/PHPConsoleHandler.php
 
