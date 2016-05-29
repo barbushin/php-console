@@ -21,8 +21,8 @@ class Session extends AllKeysList {
 	 * @param bool $autoStart Start session if it's not started
 	 */
 	public function __construct($sessionKey = '__PHP_Console_postponed', $autoStart = true) {
-		if($autoStart && (defined('PHP_SESSION_ACTIVE') ? session_status() != PHP_SESSION_ACTIVE : !session_id())) {
-			session_start();
+        	if($autoStart && (defined('PHP_SESSION_ACTIVE') ? session_status() != PHP_SESSION_ACTIVE : !session_id()) && !headers_sent()) {
+        		session_start();
 		}
 		register_shutdown_function('session_write_close'); // force saving session data if session handler is overridden
 		$this->sessionKey = $sessionKey;
