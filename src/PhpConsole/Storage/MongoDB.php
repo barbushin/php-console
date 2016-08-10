@@ -30,6 +30,10 @@ class MongoDB extends ExpiringKeyValue {
 			throw new \Exception('Unable to get collection');
 		}
 
+		if (!in_array($collection, $this->mongoCollection->db->getCollectionNames())) {
+			$this->mongoCollection->db->createCollection($collection);
+		}
+
 		$this->mongoCollection->ensureIndex(array(
 			'expireAt' => 1,
 		), array(
