@@ -1,5 +1,12 @@
 # PHP Console server library
 
+[![Author](http://img.shields.io/badge/author-@barbushin-blue.svg?style=flat-square)](https://www.linkedin.com/in/barbushin)
+[![GitHub release](https://img.shields.io/github/release/barbushin/php-console.svg?maxAge=2592000&style=flat-square)](https://packagist.org/packages/php-console/php-console)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/barbushin/php-console.svg?style=flat-square)](https://scrutinizer-ci.com/g/barbushin/php-console/code-structure)
+[![Build Status](https://img.shields.io/travis/barbushin/php-console/master.svg?style=flat-square)](https://travis-ci.org/barbushin/php-console)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE)
+[![Packagist](https://img.shields.io/packagist/dt/php-console/php-console.svg?maxAge=86400&style=flat-square)](https://packagist.org/packages/php-console/php-console)
+
 PHP Console allows you to handle PHP errors & exceptions, dump variables, execute PHP code remotely and many other things using [Google Chrome extension PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef) and [PhpConsole server library](https://github.com/barbushin/php-console).
 
 ### Overview
@@ -23,13 +30,13 @@ PHP Console allows you to handle PHP errors & exceptions, dump variables, execut
 
 	{
 		"require": {
-			"php-console/php-console": "~3.0"
+			"php-console/php-console": "^3.1"
 		}
 	}
 
 Or
 
-	$ composer require php-console/php-console ~3.0
+	$ composer require php-console/php-console
 
 ### Monolog handler
 https://github.com/Seldaek/monolog/blob/master/src/Monolog/Handler/PHPConsoleHandler.php

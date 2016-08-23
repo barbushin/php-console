@@ -1,0 +1,35 @@
+language: php
+
+sudo: false
+
+matrix:
+  include:
+    - php: 5.3
+      env: COLLECT_COVERAGE=true
+    - php: 5.4
+      env: COLLECT_COVERAGE=true
+    - php: 5.5
+      env: COLLECT_COVERAGE=true
+    - php: 5.6
+      env: COLLECT_COVERAGE=true
+    - php: 7.0
+      env: COLLECT_COVERAGE=true
+    - php: 7.1
+      env: COLLECT_COVERAGE=true
+  fast_finish: true
+
+cache:
+  directories:
+    - $HOME/.composer/cache
+
+before_install:
+  - travis_retry composer self-update
+
+install:
+  - travis_retry composer update --no-interaction --prefer-source
+
+script:
+  - composer test-cover
+
+after_script:
+ - if [ "$COLLECT_COVERAGE" == "true" ]; then wget https://scrutinizer-ci.com/ocular.phar && php ocular.phar code-coverage:upload --format=php-clover build/clover.xml; fi
