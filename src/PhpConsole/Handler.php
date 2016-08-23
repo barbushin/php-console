@@ -49,6 +49,9 @@ class Handler {
 		$this->connector = Connector::getInstance();
 	}
 
+	/**
+	 * @codeCoverageIgnore
+	 */
 	private final function __clone() {
 	}
 
@@ -86,7 +89,7 @@ class Handler {
 	 */
 	public function setHandleErrors($isEnabled) {
 		$this->checkIsCalledBeforeStart();
-		$this->handleErrors = $isEnabled;
+		$this->handleErrors = $isEnabled; // @codeCoverageIgnore
 	}
 
 	/**
@@ -95,7 +98,7 @@ class Handler {
 	 */
 	public function setHandleExceptions($isEnabled) {
 		$this->checkIsCalledBeforeStart();
-		$this->handleExceptions = $isEnabled;
+		$this->handleExceptions = $isEnabled; // @codeCoverageIgnore
 	}
 
 	/**
@@ -153,6 +156,7 @@ class Handler {
 
 	/**
 	 * Method is called by register_shutdown_function(), it's required to handle fatal PHP errors. Never call it manually.
+	 * @codeCoverageIgnore
 	 */
 	public function checkFatalErrorOnShutDown() {
 		$error = error_get_last();

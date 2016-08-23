@@ -1,6 +1,8 @@
 <?php
 
 namespace PhpConsole\Dispatcher;
+use PhpConsole\DebugMessage;
+use PhpConsole\Dispatcher;
 
 /**
  * Sends debug data to connector as client expected messages
@@ -12,7 +14,7 @@ namespace PhpConsole\Dispatcher;
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
  * @license http://www.opensource.org/licenses/BSD-3-Clause "The BSD 3-Clause License"
  */
-class Debug extends \PhpConsole\Dispatcher {
+class Debug extends Dispatcher {
 
 	/** @var bool Autodetect and append trace data to debug */
 	public $detectTraceAndSource = false;
@@ -25,7 +27,7 @@ class Debug extends \PhpConsole\Dispatcher {
 	 */
 	public function dispatchDebug($data, $tags = null, $ignoreTraceCalls = 0) {
 		if($this->isActive()) {
-			$message = new \PhpConsole\DebugMessage();
+			$message = new DebugMessage();
 			$message->data = $this->dumper->dump($data);
 			if($tags) {
 				$message->tags = explode('.', $tags);

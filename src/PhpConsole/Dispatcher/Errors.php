@@ -1,6 +1,9 @@
 <?php
 
 namespace PhpConsole\Dispatcher;
+use PhpConsole\Dispatcher;
+use PhpConsole\ErrorMessage;
+use PhpConsole\Message;
 
 /**
  * Sends system errors and exceptions to connector as client expected messages
@@ -12,7 +15,7 @@ namespace PhpConsole\Dispatcher;
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
  * @license http://www.opensource.org/licenses/BSD-3-Clause "The BSD 3-Clause License"
  */
-class Errors extends \PhpConsole\Dispatcher {
+class Errors extends Dispatcher {
 
 	/** @var array PHP errors constants values => names(will be initialized in first call) */
 	protected static $errorsConstantsValues = array();
@@ -40,7 +43,7 @@ class Errors extends \PhpConsole\Dispatcher {
 	/** @var bool Dispatch $exception->getPrevious() if not empty */
 	public $dispatchPreviousExceptions = true;
 
-	/** @var \PhpConsole\ErrorMessage[] */
+	/** @var ErrorMessage[] */
 	protected $sentMessages = array();
 
 	/**
@@ -53,7 +56,7 @@ class Errors extends \PhpConsole\Dispatcher {
 	 */
 	public function dispatchError($code = null, $text = null, $file = null, $line = null, $ignoreTraceCalls = 0) {
 		if($this->isActive()) {
-			$message = new \PhpConsole\ErrorMessage();
+			$message = new ErrorMessage();
 			$message->code = $code;
 			$message->class = $this->getErrorTypeByCode($code);
 			$message->data = $this->dumper->dump($text);
@@ -75,7 +78,7 @@ class Errors extends \PhpConsole\Dispatcher {
 			if($this->dispatchPreviousExceptions && $exception->getPrevious()) {
 				$this->dispatchException($exception->getPrevious());
 			}
-			$message = new \PhpConsole\ErrorMessage();
+			$message = new ErrorMessage();
 			$message->code = $exception->getCode();
 			$message->class = get_class($exception);
 			$message->data = $this->dumper->dump($exception->getMessage());
@@ -88,9 +91,9 @@ class Errors extends \PhpConsole\Dispatcher {
 
 	/**
 	 * Send message to PHP Console connector
-	 * @param \PhpConsole\Message $message
+	 * @param Message $message
 	 */
-	protected function sendMessage(\PhpConsole\Message $message) {
+	protected function sendMessage(Message $message) {
 		if(!$this->isIgnored($message)) {
 			parent::sendMessage($message);
 			$this->sentMessages[] = $message;
@@ -118,10 +121,10 @@ class Errors extends \PhpConsole\Dispatcher {
 
 	/**
 	 * Return true if message with same file, line & class was already sent
-	 * @param \PhpConsole\ErrorMessage $message
+	 * @param ErrorMessage $message
 	 * @return bool
 	 */
-	protected function isIgnored(\PhpConsole\ErrorMessage $message) {
+	protected function isIgnored(ErrorMessage $message) {
 		if($this->ignoreRepeatedSource && $message->file) {
 			foreach($this->sentMessages as $sentMessage) {
 				if($message->file == $sentMessage->file && $message->line == $sentMessage->line && $message->class == $sentMessage->class) {

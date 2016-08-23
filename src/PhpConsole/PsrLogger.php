@@ -2,6 +2,8 @@
 
 namespace PhpConsole;
 
+use Psr\Log\AbstractLogger;
+use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
 
 /**
@@ -15,7 +17,7 @@ use Psr\Log\LogLevel;
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
  * @license http://www.opensource.org/licenses/BSD-3-Clause "The BSD 3-Clause License"
  */
-class PsrLogger extends \Psr\Log\AbstractLogger {
+class PsrLogger extends AbstractLogger {
 
 	public static $debugLevels = array(
 		LogLevel::NOTICE => 'notice',
@@ -70,7 +72,7 @@ class PsrLogger extends \Psr\Log\AbstractLogger {
 			}
 		}
 		else {
-			throw new \Psr\Log\InvalidArgumentException('Unknown log level "' . $level . '"');
+			throw new InvalidArgumentException('Unknown log level "' . $level . '"');
 		}
 	}
 

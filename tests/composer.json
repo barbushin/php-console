@@ -1,5 +1,0 @@
-{
-	"require": {
-		"psr/log": "dev-master"
-	}
-}

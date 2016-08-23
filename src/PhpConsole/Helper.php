@@ -110,11 +110,14 @@ namespace PhpConsole {
 }
 
 namespace {
+
+	use PhpConsole\Helper;
+
 	if(!class_exists('PC', false)) {
 		/**
 		 * Helper short class name in global namespace
 		 */
-		class PC extends \PhpConsole\Helper {
+		class PC extends Helper {
 
 		}
 	}

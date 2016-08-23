@@ -1,0 +1,44 @@
+<phpunit backupGlobals="true"
+         backupStaticAttributes="true"
+         cacheTokens="true"
+         colors="true"
+         convertErrorsToExceptions="true"
+         convertNoticesToExceptions="true"
+         convertWarningsToExceptions="true"
+         forceCoversAnnotation="false"
+         mapTestClassNameToCoveredClassName="false"
+         processIsolation="false"
+         stopOnError="true"
+         stopOnFailure="true"
+         stopOnIncomplete="true"
+         stopOnSkipped="false"
+         bootstrap="test/bootstrap.php"
+         verbose="true"
+>
+
+	<php>
+		<env name="PC_TEST_SERVER" value="http://localhost/php-console/test/server.php"/>
+	</php>
+
+	<testsuites>
+		<testsuite name="PHP Console Test Suite">
+			<directory>test/Test</directory>
+			<exclude>test/Test/Remote/</exclude>
+		</testsuite>
+	</testsuites>
+
+	<filter>
+		<whitelist>
+			<directory suffix=".php">src</directory>
+		</whitelist>
+	</filter>
+
+	<logging>
+		<log type="tap" target="build/report.tap"/>
+		<log type="junit" target="build/report.junit.xml"/>
+		<log type="coverage-html" target="build/coverage" charset="UTF-8" yui="true" highlight="true"/>
+		<log type="coverage-text" target="build/coverage.txt"/>
+		<log type="coverage-clover" target="build/clover.xml"/>
+	</logging>
+
+</phpunit>

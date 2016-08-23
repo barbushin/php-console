@@ -1,6 +1,7 @@
 <?php
 
 namespace PhpConsole\Storage;
+use PhpConsole\Storage;
 
 /**
  * Abstract class for key-value stores with key auto-expire support
@@ -11,8 +12,9 @@ namespace PhpConsole\Storage;
  * @author Sergey Barbushin http://linkedin.com/in/barbushin
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
  * @license http://www.opensource.org/licenses/BSD-3-Clause "The BSD 3-Clause License"
+ * @codeCoverageIgnore
  */
-abstract class ExpiringKeyValue extends \PhpConsole\Storage {
+abstract class ExpiringKeyValue extends Storage {
 
 	/**
 	 * Save data by auto-expire key

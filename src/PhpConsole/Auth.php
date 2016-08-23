@@ -11,6 +11,7 @@ namespace PhpConsole;
  * @author Sergey Barbushin http://linkedin.com/in/barbushin
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
  * @license http://www.opensource.org/licenses/BSD-3-Clause "The BSD 3-Clause License"
+ * @codeCoverageIgnore
  */
 class Auth {
 
@@ -43,6 +44,7 @@ class Auth {
 
 	/**
 	 * Get authorization result data for client
+	 * @codeCoverageIgnore
 	 * @param ClientAuth|null $clientAuth
 	 * @return ServerAuthStatus
 	 */
@@ -55,6 +57,7 @@ class Auth {
 
 	/**
 	 * Check if client authorization data is valid
+	 * @codeCoverageIgnore
 	 * @param ClientAuth $clientAuth
 	 * @return bool
 	 */

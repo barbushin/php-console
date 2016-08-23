@@ -100,6 +100,10 @@ abstract class Dispatcher {
 				}
 			}
 
+			if(strpos($call['function'], '{closure}')) {
+				$call['function'] = '{closure}';
+			}
+
 			$traceCall = new TraceCall();
 			$traceCall->call = (isset($call['class']) ? $call['class'] . $call['type'] : '') . $call['function'] . '(' . implode(', ', $args) . ')';
 			if(isset($call['file'])) {

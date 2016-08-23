@@ -1,6 +1,11 @@
 <?php
 
 namespace PhpConsole\Dispatcher;
+use PhpConsole\Connector;
+use PhpConsole\Dispatcher;
+use PhpConsole\Dumper;
+use PhpConsole\EvalProvider;
+use PhpConsole\EvalResultMessage;
 
 /**
  * Executes client code and sends result data to connector as client expected messages
@@ -12,32 +17,32 @@ namespace PhpConsole\Dispatcher;
  * @copyright © Sergey Barbushin, 2011-2013. All rights reserved.
  * @license http://www.opensource.org/licenses/BSD-3-Clause "The BSD 3-Clause License"
  */
-class Evaluate extends \PhpConsole\Dispatcher {
+class Evaluate extends Dispatcher {
 
-	/** @var \PhpConsole\EvalProvider */
+	/** @var EvalProvider */
 	protected $evalProvider;
 
 	/**
-	 * @param \PhpConsole\Connector $connector
-	 * @param \PhpConsole\EvalProvider $evalProvider
-	 * @param \PhpConsole\Dumper $dumper
+	 * @param Connector $connector
+	 * @param EvalProvider $evalProvider
+	 * @param Dumper $dumper
 	 */
-	public function __construct(\PhpConsole\Connector $connector, \PhpConsole\EvalProvider $evalProvider, \PhpConsole\Dumper $dumper) {
+	public function __construct(Connector $connector, EvalProvider $evalProvider, Dumper $dumper) {
 		$this->evalProvider = $evalProvider;
 		parent::__construct($connector, $dumper);
 	}
 
 	/**
 	 * Override eval provider
-	 * @param \PhpConsole\EvalProvider $evalProvider
+	 * @param EvalProvider $evalProvider
 	 */
-	public function setEvalProvider(\PhpConsole\EvalProvider $evalProvider) {
+	public function setEvalProvider(EvalProvider $evalProvider) {
 		$this->evalProvider = $evalProvider;
 	}
 
 	/**
 	 * Get eval provider
-	 * @return \PhpConsole\EvalProvider
+	 * @return EvalProvider
 	 */
 	public function getEvalProvider() {
 		return $this->evalProvider;
@@ -54,7 +59,7 @@ class Evaluate extends \PhpConsole\Dispatcher {
 			$result = $this->evalProvider->evaluate($code);
 			ini_set('display_errors', $oldDisplayErrors);
 
-			$message = new \PhpConsole\EvalResultMessage();
+			$message = new EvalResultMessage();
 			$message->return = $this->dumper->dump($result->return);
 			$message->output = $this->dumper->dump($result->output);
 			$message->time = round($result->time, 6);
