@@ -28,7 +28,6 @@ $features = array(
 
 // List of scripts from ./utils directory
 $utils = array(
-	'build_phar' => 'Build PHAR',
 	'test_jump_to_file' => 'Test Jump to File',
 	'detect_headers_limit' => 'Detect server headers limit',
 );
