@@ -147,7 +147,6 @@ class Handler {
 	 */
 	protected function initErrorsHandler() {
 		ini_set('display_errors', false);
-		ini_set('html_errors', false);
 		error_reporting($this->errorsHandlerLevel ? : E_ALL | E_STRICT);
 		$this->oldErrorsHandler = set_error_handler(array($this, 'handleError'));
 		register_shutdown_function(array($this, 'checkFatalErrorOnShutDown'));
