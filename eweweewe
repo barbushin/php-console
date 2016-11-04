@@ -1,0 +1,2 @@
+$a = "sdlsd;;sdl;sdl;sdl'";
+echo($a."</br>");
