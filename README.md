@@ -13,7 +13,7 @@ PHP Console allows you to handle PHP errors & exceptions, dump variables, execut
 
 * See [presentation video](http://www.youtube.com/watch?v=_4kG-Zrs2Io).
 * Install Google Chrome extension [PHP Console](https://chrome.google.com/webstore/detail/php-console/nfhmhhlpfleoednkpnnnkolmclajemef).
-* See how it works on [live demo](http://php-console.com/instance/examples) page.
+* See how it works on [live demo](http://consle.com/instance/examples) page.
 * PHP Console extension [features list and screenshots](https://github.com/barbushin/php-console/wiki/PHP-Console-extension-features).
 * PHP Console server library [features list](https://github.com/barbushin/php-console/wiki/PHP-Console-server-features).
 
@@ -64,7 +64,7 @@ https://github.com/unfulvio/wp-php-console (thanks to [@nekojira](https://github
 
 # Usage
 
-You can try most of PHP Console features on [live demo](http://php-console.com/instance/examples) server.
+You can try most of PHP Console features on [live demo](http://consle.com/instance/examples) server.
 
 ## Connector
 
@@ -109,7 +109,7 @@ PhpConsole server library is optimized for lazy initialization only for clients 
 
 ### Protect by password
 
-[![ScreenShot](http://php-console.com/res/screenshot/auth_420.png)](http://php-console.com/instance/examples/#protect_by_password)
+[![ScreenShot](http://consle.com/res/screenshot/auth_420.png)](http://consle.com/instance/examples/#protect_by_password)
 
 	$connector->setPassword('yohoho123', true);
 
@@ -127,7 +127,7 @@ So all PHP Console clients will be automatically redirected to HTTPS.
 
 ## Handle errors
 
-[![ScreenShot](http://php-console.com/res/screenshot/errors_420.png)](http://php-console.com/instance/examples/#handle_errors)
+[![ScreenShot](http://consle.com/res/screenshot/errors_420.png)](http://consle.com/instance/examples/#handle_errors)
 
 There is a [PhpConsole\Handler](src/PhpConsole/Handler.php) class that initializes PHP errors & exceptions handlers and provides the next features:
 
@@ -150,7 +150,7 @@ Initialize `PhpConsole\Handler` in the top of your main project script:
 
 ## Debug vars
 
-[![ScreenShot](http://php-console.com/res/screenshot/debug_420.png)](http://php-console.com/instance/examples/#debug_vars)
+[![ScreenShot](http://consle.com/res/screenshot/debug_420.png)](http://consle.com/instance/examples/#debug_vars)
 
 PHP Console has multifunctional and smart vars dumper that allows to
 
@@ -195,7 +195,7 @@ PHP Console has multifunctional and smart vars dumper that allows to
 
 ## Remote PHP code execution
 
-[![ScreenShot](http://php-console.com/res/screenshot/eval_terminal_420.png)](http://php-console.com/instance/examples/#eval_terminal)
+[![ScreenShot](http://consle.com/res/screenshot/eval_terminal_420.png)](http://consle.com/instance/examples/#eval_terminal)
 
 PHP Console provide a way to execute PHP code on your server remotely, from Google Chrome extension terminal.
 
