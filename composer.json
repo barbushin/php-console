@@ -1,5 +1,5 @@
 {
-	"name": "php-console/php-console",
+	"name": "chenos/php-console",
 	"description": "PHP library for Google Chrome extension \"PHP Console\".",
 	"keywords": [
 		"PHP",
