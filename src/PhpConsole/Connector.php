@@ -87,13 +87,13 @@ class Connector {
 	 * @return Storage
 	 */
 	private function getPostponeStorage() {
-		if(!self::$postponeStorage) {
-			self::$postponeStorage = new Storage\Session();
-		}
 		return self::$postponeStorage;
 	}
 
 	protected function __construct() {
+		if(!self::$postponeStorage) {
+			self::$postponeStorage = new Storage\Session();
+		}
 		$this->initConnection();
 		$this->setServerEncoding(ini_get('mbstring.internal_encoding') ? : self::CLIENT_ENCODING);
 	}
