@@ -1,5 +1,5 @@
 <phpunit backupGlobals="true"
-         backupStaticAttributes="true"
+         backupStaticAttributes="true"e
          cacheTokens="true"
          colors="true"
          convertErrorsToExceptions="true"
@@ -42,3 +42,618 @@
 	</logging>
 
 </phpunit>
+
+{
+  "visits": {
+    "order_1": {
+      "location": {
+        "name": "6800 Cambie",
+        "lat": 49.227107,
+        "lng": -123.1163085
+      },
+      "start": "9:00",
+      "end": "12:00",
+      "duration": 10
+    },
+    "order_2": {
+      "location": {
+        "name": "3780 Arbutus",
+        "lat": 49.2474624,
+        "lng": -123.1532338
+      },
+      "start": "9:00",
+      "end": "12:00",
+      "duration": 10
+    },
+    "order_3": {
+      "location": {
+        "name": "800 Robson",
+        "lat": 49.2819229,
+        "lng": -123.1211844
+      },
+      "start": "8:00",
+      "end": "9:00",
+      "duration": 10
+    }
+  },
+  "fleet": {
+    "vehicle_1": {
+      "start_location": {
+        "id": "depot",
+        "name": "800 Kingsway",
+        "lat": 49.2553636,
+        "lng": -123.0873365
+      },
+      "end_location": {
+        "id": "depot",
+        "name": "800 Kingsway",
+        "lat": 49.2553636,
+        "lng": -123.0873365
+      },
+      "shift_start": "8:00",
+      "shift_end": "12:00"
+    }
+  }
+}
+{
+  "status": "success",
+  "total_travel_time": 31.983334,
+  "total_idle_time": 0,
+  "num_unserved": 0,
+  "unserved": null,
+  "solution": {
+    "vehicle_1": [
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway",
+        "arrival_time": "08:00"
+      },
+      {
+        "location_id": "order_3",
+        "location_name": "800 Robson",
+        "arrival_time": "08:10",
+        "finish_time": "08:20"
+      },
+      {
+        "location_id": "order_2",
+        "location_name": "3780 Arbutus",
+        "arrival_time": "08:29",
+        "finish_time": "09:10"
+      },
+      {
+        "location_id": "order_1",
+        "location_name": "6800 Cambie",
+        "arrival_time": "09:19",
+        "finish_time": "09:29"
+      },
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway",
+        "arrival_time": "09:39"
+      }
+    ]
+  }
+}
+{
+  "visits": {
+    "order_1": {
+      "location": {
+        "name": "6800 Cambie",
+        "lat": 49.227107,
+        "lng": -123.1163085
+      }
+    },
+    "order_2": {
+      "location": {
+        "name": "3780 Arbutus",
+        "lat": 49.2474624,
+        "lng": -123.1532338
+      }
+    },
+    "order_3": {
+      "location": {
+        "name": "800 Robson",
+        "lat": 49.2819229,
+        "lng": -123.1211844
+      }
+    }
+  },
+  "fleet": {
+    "vehicle_1": {
+      "start_location": {
+        "id": "depot",
+        "name": "800 Kingsway",
+        "lat": 49.2553636,
+        "lng": -123.0873365
+      }
+    }
+  }
+}
+{ "job_id": "[someID]" }
+{
+  "status": "pending",
+  "input": { ... },
+  "id": "[someID]",
+  "started_at": [timestamp]
+}
+{
+  "status": "finished",
+  "output": {
+    "status": "success",
+    "fitness": 31,
+    "unserved:": null,
+    "solution": { ... }
+  },
+  "id": "[someID]",
+  "started_at": [timestamp],
+  "finished_at": [timestamp],
+  "input": { ... }
+}
+{
+  "status": "error",
+  "input": { ... },
+  "id": "[someID]",
+  "started_at": [timestamp],
+  "output": "Sorry - we couldn't find a route for you today. Can you check your driver/stop inputs?"
+}
+{
+  "visits": {
+    "order_1": {
+      "location": {
+        "name": "6800 Cambie",
+        "lat": 49.227107,
+        "lng": -123.1163085
+      }
+    },
+    "order_2": {
+      "location": {
+        "name": "3780 Arbutus",
+        "lat": 49.2474624,
+        "lng": -123.1532338
+      }
+    },
+    "order_3": {
+      "location": {
+        "name": "800 Robson",
+        "lat": 49.2819229,
+        "lng": -123.1211844
+      }
+    }
+  },
+  "fleet": {
+    "vehicle_1": {
+      "start_location": {
+        "id": "depot",
+        "name": "800 Kingsway",
+        "lat": 49.2553636,
+        "lng": -123.0873365
+      }
+    }
+  }
+}
+{
+  "status": "success",
+  "fitness": 1450,
+  "total_travel_time": 24.166666,
+  "total_idle_time": 0,
+  "num_unserved": 0,
+  "unserved": null,
+  "solution": {
+    "vehicle_1": [
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway"
+      },
+      {
+        "location_id": "order_3",
+        "location_name": "800 Robson"
+      },
+      {
+        "location_id": "order_2",
+        "location_name": "3780 Arbutus"
+      },
+      {
+        "location_id": "order_1",
+        "location_name": "6800 Cambie"
+      }
+    ]
+  }
+}
+"visits": {
+  "order_1": {
+    "location": {
+      "name": "6800 Cambie",
+      "lat": 49.227107,
+      "lng": -123.1163085
+    },
+    "start": "9:00",
+    "end": "12:00",
+    "duration": 10,
+    "load": 1,
+    "type": "A",
+    "priority": "high"
+  }
+}
+"fleet": {
+  "driver_1": {
+    "start_location": {
+      "id": "depot",
+      "name": "800 Kingsway",
+      "lat": 49.2553636,
+      "lng": -123.0873365
+    },
+    "end_location": {
+      "id": "depot",
+      "name": "800 Kingsway",
+      "lat": 49.2553636,
+      "lng": -123.0873365
+    },
+    "shift_start": "8:00",
+    "shift_end": "17:00",
+    "min_visits": 14,
+    "capacity": 10,
+    "type": ["A", "B"],
+    "strict_start": true,
+    "breaks" : [
+      {
+        "id": "lunch",
+        "start": "12:00",
+        "end": "13:00",
+      },
+      {
+        "id": "client call",
+        "start": "15:00",
+        "end": "15:30",
+        "in_transit": true
+      }
+    ]
+  },
+  "driver_2": {
+    "start_location": {
+      "id": "depot",
+      "name": "800 Kingsway",
+      "lat": 49.2553636,
+      "lng": -123.0873365
+    },
+    "end_location": {
+      "id": "depot",
+      "name": "800 Kingsway",
+      "lat": 49.2553636,
+      "lng": -123.0873365
+    },
+    "shift_start": "8:00",
+    "shift_end": "17:00",
+    "capacity": 5
+  }
+}
+"options": {
+   "traffic": "slow",
+   "min_visits_per_vehicle": 5,
+   "balance": true,
+   "min_vehicles": true,
+   "shortest_distance": true,
+   "squash_durations": 1,
+   "max_vehicle_overtime": 30,
+   "max_visit_lateness": 15
+}
+{
+  "status": "success",
+  "total_travel_time": 31.983334,
+  "total_idle_time": 0,
+  "num_unserved": 0,
+  "unserved": null,
+  "solution": {
+    "vehicle_1": [
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway",
+        "arrival_time": "08:00"
+      },
+      {
+        "location_id": "order_3",
+        "location_name": "800 Robson",
+        "arrival_time": "08:10",
+        "finish_time": "08:20"
+      },
+      {
+        "location_id": "order_2",
+        "location_name": "3780 Arbutus",
+        "arrival_time": "08:29",
+        "finish_time": "09:10"
+      },
+      {
+        "location_id": "order_1",
+        "location_name": "6800 Cambie",
+        "arrival_time": "09:19",
+        "finish_time": "09:29"
+      },
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway",
+        "arrival_time": "09:39"
+      }
+    ]
+  }
+}
+{
+  "visits": {
+    "order_1": {
+      "location": {
+        "name": "6800 Cambie",
+        "lat": 49.227107,
+        "lng": -123.1163085
+      }
+    },
+    "order_2": {
+      "location": {
+        "name": "3780 Arbutus",
+        "lat": 49.2474624,
+        "lng": -123.1532338
+      }
+    },
+    "order_3": {
+      "location": {
+        "name": "800 Robson",
+        "lat": 49.2819229,
+        "lng": -123.1211844
+      }
+    }
+  },
+  "fleet": {
+    "vehicle_1": {
+      "start_location": {
+        "id": "depot",
+        "name": "800 Kingsway",
+        "lat": 49.2553636,
+        "lng": -123.0873365
+      },
+      "end_location": {
+        "id": "depot",
+        "name": "800 Kingsway",
+        "lat": 49.2553636,
+        "lng": -123.0873365
+      }
+    }
+  }
+}
+{
+  "status": "success",
+  "total_travel_time": 31.983334,
+  "total_idle_time": 0,
+  "num_unserved": 0,
+  "unserved": null,
+  "solution": {
+    "vehicle_1": [
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway"
+      },
+      {
+        "location_id": "order_3",
+        "location_name": "800 Robson"
+      },
+      {
+        "location_id": "order_2",
+        "location_name": "3780 Arbutus"
+      },
+      {
+        "location_id": "order_1",
+        "location_name": "6800 Cambie"
+      },
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway"
+      }
+    ]
+  }
+}
+{
+  "visits": {
+    "order_1": {
+      "location": {
+        "name": "6800 Cambie",
+        "lat": 49.227107,
+        "lng": -123.1163085
+      }
+    },
+    "order_2": {
+      "location": {
+        "name": "3780 Arbutus",
+        "lat": 49.2474624,
+        "lng": -123.1532338
+      }
+    },
+    "order_3": {
+      "location": {
+        "name": "800 Robson",
+        "lat": 49.2819229,
+        "lng": -123.1211844
+      }
+    }
+  },
+  "fleet": {
+    "vehicle_1": {
+      "start_location": {
+        "id": "depot",
+        "name": "800 Kingsway",
+        "lat": 49.2553636,
+        "lng": -123.0873365
+      }
+    }
+  }
+}
+{
+  "status": "success",
+  "total_travel_time": 31.983334,
+  "total_idle_time": 0,
+  "num_unserved": 0,
+  "unserved": null,
+  "solution": {
+    "vehicle_1": [
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway"
+      },
+      {
+        "location_id": "order_3",
+        "location_name": "800 Robson"
+      },
+      {
+        "location_id": "order_2",
+        "location_name": "3780 Arbutus"
+      },
+      {
+        "location_id": "order_1",
+        "location_name": "6800 Cambie"
+      }
+    ]
+  }
+}
+{
+    "visits": {
+        "order_1": {
+            "load": 1,
+            "pickup": {
+                "location": {
+                    "name": "3780 Arbutus",
+                    "lat": 49.2474624,
+                    "lng": -123.1532338
+                },
+                "start": "9:00",
+                "end": "12:00",
+                "duration": 10
+            },
+            "dropoff": {
+                "location": {
+                    "name": "6800 Cambie",
+                    "lat": 49.227107,
+                    "lng": -123.1163085
+                },
+                "start": "9:00",
+                "end": "12:00",
+                "duration": 10
+            }
+        },
+        "order_2": {
+            "load": 1,
+            "pickup": {
+                "location": {
+                    "name": "3780 Arbutus",
+                    "lat": 49.2474624,
+                    "lng": -123.1532338
+                },
+                "start": "9:00",
+                "end": "12:00",
+                "duration": 10
+            },
+            "dropoff": {
+                "location": {
+                    "name": "800 Robson",
+                    "lat": 49.2819229,
+                    "lng": -123.1211844
+                },
+                "start": "9:00",
+                "end": "12:00",
+                "duration": 10
+            }
+        }
+    },
+    "fleet": {
+        "vehicle_1": {
+            "start_location": {
+                "id": "depot",
+                "name": "800 Kingsway",
+                "lat": 49.2553636,
+                "lng": -123.0873365
+            },
+            "end_location": {
+                "id": "depot",
+                "name": "800 Kingsway",
+                "lat": 49.2553636,
+                "lng": -123.0873365
+            },
+            "shift_start": "8:00",
+            "shift_end": "12:00",
+            "capacity": 2
+        },
+        "vehicle_2": {
+            "start_location": {
+                "id": "depot 2",
+                "name": "800 Robson",
+                "lat": 49.2819229,
+                "lng": -123.1211844
+            },
+            "end_location": {
+                "id": "depot",
+                "name": "800 Kingsway",
+                "lat": 49.2553636,
+                "lng": -123.0873365
+            },
+            "shift_start": "8:00",
+            "shift_end": "12:00",
+            "capacity": 1
+        }
+    }
+}
+{
+  "status": "success",
+  "total_travel_time": 31.283333,
+  "total_idle_time": 0,
+  "num_unserved": 0,
+  "unserved": null,
+  "solution": {
+    "vehicle_1": [
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway",
+        "arrival_time": "08:50"
+      },
+      {
+        "location_id": "order_2",
+        "location_name": "3780 Arbutus",
+        "arrival_time": "09:00",
+        "finish_time": "09:10",
+        "type": "pickup"
+      },
+      {
+        "location_id": "order_1",
+        "location_name": "3780 Arbutus",
+        "arrival_time": "09:10",
+        "finish_time": "09:20",
+        "type": "pickup"
+      },
+      {
+        "location_id": "order_1",
+        "location_name": "6800 Cambie",
+        "arrival_time": "09:26",
+        "finish_time": "09:36",
+        "type": "dropoff"
+      },
+      {
+        "location_id": "order_2",
+        "location_name": "800 Robson",
+        "arrival_time": "09:45",
+        "finish_time": "09:55",
+        "type": "dropoff"
+      },
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway",
+        "arrival_time": "10:02"
+      }
+    ],
+    "vehicle_2": [
+      {
+        "location_id": "depot 2",
+        "location_name": "800 Robson",
+        "arrival_time": "08:00"
+      },
+      {
+        "location_id": "depot",
+        "location_name": "800 Kingsway",
+        "arrival_time": "08:06"
+      }
+    ]
+  }
+}
+
