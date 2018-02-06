@@ -1,5 +1,5 @@
 <phpunit backupGlobals="true"
-         backupStaticAttributes="true"e
+         backupStaticAttributes="true"
          cacheTokens="true"
          colors="true"
          convertErrorsToExceptions="true"
