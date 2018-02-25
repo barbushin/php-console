@@ -43,10 +43,5 @@
 	"scripts": {
 		"test": "phpunit",
 		"test-cover": "phpunit --coverage-text"
-	},
-	"extra": {
-		"branch-alias": {
-			"dev-master": "3.1-dev"
-		}
 	}
 }
