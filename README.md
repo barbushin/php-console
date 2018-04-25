@@ -123,7 +123,7 @@ So all PHP Console clients will be automatically redirected to HTTPS.
 
 ### Protect connection by list of allowed IP masks
 
-	$connector->setAllowedIpMasks(array('192.168.*.*'));
+	$connector->setAllowedIpMasks(array('192.168.*.*', '2001:0:5ef5:79fb:*:*:*:*'));
 
 ## Handle errors
 
@@ -164,11 +164,11 @@ PHP Console has multifunctional and smart vars dumper that allows to
 
 ### How to call
 
-**Longest** native debug method call: 
+**Longest** native debug method call:
 
 	PhpConsole\Connector::getInstance()->getDebugDispatcher()->dispatchDebug($var, 'some.tags');
 
-**Shorter** call debug from Handler: 
+**Shorter** call debug from Handler:
 
 	PhpConsole\Handler::getInstance()->debug($var, 'some.tags');
 
@@ -203,18 +203,18 @@ PHP Console provide a way to execute PHP code on your server remotely, from Goog
 * Every eval request is signed with unique SHA-256 token
 * Result contains: `output`, `return` and `time` data
 * Errors & exception occurred during PHP code execution will be handled
- 
+
 
 ### Configuration
 
 	$connector = PhpConsole\Connector::getInstance();
 	$connector->setPassword($password);
-	
+
 	// Configure eval provider
 	$evalProvider = $connector->getEvalDispatcher()->getEvalProvider();
 	$evalProvider->addSharedVar('post', $_POST); // so "return $post" code will return $_POST
 	$evalProvider->setOpenBaseDirs(array(__DIR__)); // see http://php.net/open-basedir
-	
+
 	$connector->startEvalRequestsListener(); // must be called in the end of all configurations
 
 
@@ -231,14 +231,14 @@ Read [this article](https://github.com/barbushin/php-console/wiki/Jump-to-file) 
 If you have used PhpConsole `v1.x` and want to migrate to `v3.x`  without any code changes, so just use [PhpConsole\OldVersionAdapter](src/PhpConsole/OldVersionAdapter.php):
 
 	PhpConsole\OldVersionAdapter::register(); // register PhpConsole v1.x class emulator
-	
+
 	// Call old PhpConsole v1 methods as is
 	PhpConsole::start(true, true, $_SERVER['DOCUMENT_ROOT']);
 	PhpConsole::debug('Debug using old method PhpConsole::debug()', 'some,tags');
 	debug('Debug using old function debug()', 'some,tags');
 	echo $undefinedVar;
 	PhpConsole::getInstance()->handleException(new Exception('test'));
-	
+
 	// Call new PhpConsole methods, if you want :)
 	PhpConsole\Connector::getInstance()->setServerEncoding('cp1251');
 	PhpConsole\Helper::register();
