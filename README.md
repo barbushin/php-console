@@ -68,7 +68,7 @@ You can try most of PHP Console features on [live demo](http://consle.com/instan
 
 ## Connector
 
-There is a [PhpConsole\Connector](src/PhpConsole/Connector.php) class that initializes connection between PHP server and Google Chrome extension. Connection is initalized when [PhpConsole\Connector](src/PhpConsole/Connector.php) instance is initialized:
+There is a [PhpConsole\Connector](src/PhpConsole/Connector.php) class that initializes connection between PHP server and Google Chrome extension. Connection is initialized when [PhpConsole\Connector](src/PhpConsole/Connector.php) instance is initialized:
 
 	$connector = PhpConsole\Connector::getInstance();
 
