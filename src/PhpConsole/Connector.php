@@ -98,7 +98,7 @@ class Connector {
 		$this->setServerEncoding(ini_get('mbstring.internal_encoding') ? : self::CLIENT_ENCODING);
 	}
 
-	private final function __clone() {
+	private function __clone() {
 	}
 
 	/**
